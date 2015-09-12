@@ -6,6 +6,77 @@ include_once "libreria.php";
 $id_Alumno = (empty($_REQUEST['idAlumno'])) ? 0 : $_REQUEST['idAlumno'];
 
 
+//----------------------------------------------------------------------------------------------
+
+$datos = $_POST["hiddenLisTel"];
+//echo $datos;
+$vDatos = explode('/--/--/',$datos);
+//echo $vDatos[0];
+//echo count($vDatos);
+$sqlGuardar = '';
+//echo $id_cv;
+$idToDrop = '';
+$toDrop = false;
+
+for($i = 0; $i < count($vDatos) - 1; $i++){
+	$vTel = explode('/--/', $vDatos[$i]);
+	$idTel = $vTel[3];
+	if($idTel != '-1'){
+		//echo $idTel.'<br>';
+		$toDrop = true;
+		if(strlen($idToDrop) == 0){
+			$idToDrop = $idTel;
+		}else{
+			$idToDrop .= ','.$idTel;
+		}
+	}
+}
+
+if($toDrop == true){
+	$sqlDrop = "DELETE FROM telefonos_del_alumno WHERE alumno_fk='$id_Alumno' AND id_telefonos_del_alumno NOT IN($idToDrop);";
+	//echo $sqlDrop;
+	
+	if(guardarSql($sqlDrop) == 1){
+		$redireccion = 'registrarGraduado.php?idAlumno='.$id_Alumno;
+		mostrarMensaje('Los datos no se pudieron guardar correctamente 1',$redireccion);
+	}
+}
+
+if(count($vDatos) == 1){
+	$sqlDrop = "DELETE FROM telefonos_del_alumno WHERE alumno_fk='$id_Alumno';";
+	//echo $sqlDrop;
+	
+	if(guardarSql($sqlDrop) == 1){
+		$redireccion = 'registrarGraduado.php?idAlumno='.$id_Alumno;
+		mostrarMensaje('Los datos no se pudieron guardar correctamente 2',$redireccion);
+	}
+}
+
+if(count($vDatos) > 1){
+	for($i = 0; $i < count($vDatos) - 1; $i++){
+		$vTel = explode('/--/', $vDatos[$i]);
+		$idTel = $vTel[3];
+		if($idTel == '-1'){
+			$sqlGuardar .= "INSERT INTO telefonos_del_alumno(caracteristica_alumno,telefono_alumno,duenio_del_telefono,alumno_fk) VALUES('$vTel[1]','$vTel[2]','$vTel[0]','$id_Alumno');";
+		}else{
+			$sqlGuardar .= "UPDATE telefonos_del_alumno SET caracteristica_alumno='$vTel[1]', telefono_alumno='$vTel[2]', duenio_del_telefono='$vTel[0]', alumno_fk='$id_Alumno' WHERE id_telefonos_del_alumno = '$idTel';";
+		}
+	}
+
+	// //echo $sqlGuardar;
+	// $error = guardarSql($sqlGuardar);
+
+	// if ($error == 1) {
+	// 	$redireccion = 'registrarGraduado.php?idAlumno='.$id_Alumno;
+	// 	mostrarMensaje('Los datos no se pudieron guardar correctamente',$redireccion);
+	// }else{
+	// 	echo '<script> window.location = "lis.php?idcv='.$id_cv.'";</script>';
+	// }
+}
+
+//----------------------------------------------------------------------------------------------------------------------
+
+
 $gra_nombre = trim(ucwords($_REQUEST['gra_nombre']));
 $gra_apellido = trim(ucwords($_REQUEST['gra_apellido']));
 $gra_tipodoc = trim($_REQUEST['gra_tipodoc']);
@@ -13,12 +84,12 @@ $gra_nrodoc = trim($_REQUEST['gra_nrodoc']);
 $gra_fecnac = trim($_REQUEST['gra_fecnac']);
 $gra_carrera = trim($_REQUEST['gra_carrera']);
 $gra_grupo = trim($_REQUEST['gra_grupo']);
-$gra_provnac = trim($_REQUEST['gra_provnac']);
-$gra_locnac = trim($_REQUEST['gra_locnac']);
-$gra_provtrab = trim($_REQUEST['gra_provtrab']);
-$gra_loctrab = trim($_REQUEST['gra_loctrab']);
-$gra_provive = trim($_REQUEST['gra_provive']);
-$gra_locvive = trim($_REQUEST['gra_locvive']);
+//$gra_provnac = trim($_REQUEST['gra_provnac']);
+$gra_locnac = (empty($_REQUEST['gra_locnac'])) ? 0 : $_REQUEST['gra_locnac'];
+//$gra_provtrab = trim($_REQUEST['gra_provtrab']);
+$gra_loctrab = (empty($_REQUEST['gra_loctrab'])) ? 0 : $_REQUEST['gra_loctrab'];
+//$gra_provive = trim($_REQUEST['gra_provive']);
+$gra_locvive = (empty($_REQUEST['gra_locvive'])) ? 0 : $_REQUEST['gra_locvive'];
 $gra_calle = trim(ucwords($_REQUEST['gra_calle']));
 $gra_nrocalle = trim($_REQUEST['gra_nrocalle']);
 $gra_depto = trim($_REQUEST['gra_depto']);
@@ -123,11 +194,13 @@ if ($id_Alumno == 0){
 
 	$id_Alumno = traerId('id_alumno','alumno');
 	//NUEVO GRADUADO
-	$consultas= "INSERT INTO alumno(id_alumno,nombre_alumno,apellido_alumno,mail_alumno,facebook_alumno,numerodni_alumno,tipodni_alumno,calle_alumno,perfilacademico_alumno,foto_alumno,carrera_alumno,ancho_final,alto_final,fechanacimiento_alumno,numerocalle_alumno,mail_alumno2,twitter_alumno,provincia_nac_alumno,localidad_nac_alumno,provincia_trabajo_alumno,localidad_trabajo_alumno,provincia_viviendo_alumno,localidad_viviendo_alumno,perfil_laboral_alumno,gra_depto,gra_piso)VALUES('$id_Alumno','$gra_nombre','$gra_apellido','$gra_mail1','$gra_facebook','$gra_nrodoc',$gra_tipodoc,'$gra_calle','$gra_peraca','$destino_bd',$gra_carrera,'$ancho_final','$alto_final','$gra_fecnac','$gra_nrocalle','$gra_mail2','$gra_twitter',$gra_provnac,$gra_locnac,$gra_provtrab,$gra_loctrab,$gra_provive,$gra_locvive,'$gra_perlab','$gra_depto','$gra_piso');";
+	$consultas= "INSERT INTO alumno(id_alumno,nombre_alumno,apellido_alumno,mail_alumno,facebook_alumno,numerodni_alumno,tipodni_alumno,calle_alumno,perfilacademico_alumno,foto_alumno,carrera_alumno,ancho_final,alto_final,fechanacimiento_alumno,numerocalle_alumno,mail_alumno2,twitter_alumno,localidad_nac_alumno,localidad_trabajo_alumno,localidad_viviendo_alumno,perfil_laboral_alumno,gra_depto,gra_piso)VALUES('$id_Alumno','$gra_nombre','$gra_apellido','$gra_mail1','$gra_facebook','$gra_nrodoc',$gra_tipodoc,'$gra_calle','$gra_peraca','$destino_bd',$gra_carrera,'$ancho_final','$alto_final','$gra_fecnac','$gra_nrocalle','$gra_mail2','$gra_twitter',$gra_locnac,$gra_loctrab,$gra_locvive,'$gra_perlab','$gra_depto','$gra_piso');";
 	//ASIGNO AL GRADUADO A UN GRUPO
 	$consultas .= "INSERT INTO alumnos_por_grupo(grupo_fk, alumno_fk)VALUES('$gra_grupo','$id_Alumno');";
+
+	//$consultas .= "INSERT INTO telefonos_del_alumno(grupo_fk, alumno_fk)VALUES('$gra_grupo','$id_Alumno');";
 	//echo $consultas;
-	$error = guardarSql($consultas);
+	$error = guardarSql($consultas.$sqlGuardar);
 
 	include_once "cerrar_conn.php";
 	if ($error == 1){
@@ -143,7 +216,7 @@ if ($id_Alumno == 0){
 	//$tiene_foto = contarRegistro('*','alumno','foto_alumno <> '' AND id_alumno = '.$id_Alumno); //$tiene_foto > 0, si tiene foto de antes.
 		
 	if(empty($nombreFoto)){
-		$consultas = "UPDATE alumno SET nombre_alumno = '$gra_nombre',apellido_alumno = '$gra_apellido',mail_alumno = '$gra_mail1',facebook_alumno = '$gra_facebook',numerodni_alumno = '$gra_nrodoc',tipodni_alumno = $gra_tipodoc,calle_alumno = '$gra_calle',perfilacademico_alumno = '$gra_peraca',carrera_alumno = $gra_carrera,fechanacimiento_alumno = '$gra_fecnac',numerocalle_alumno = '$gra_nrocalle',mail_alumno2 = '$gra_mail2',twitter_alumno = '$gra_twitter',provincia_nac_alumno = $gra_provnac,localidad_nac_alumno = $gra_locnac,provincia_trabajo_alumno = $gra_provtrab,localidad_trabajo_alumno = $gra_loctrab,provincia_viviendo_alumno = $gra_provive,localidad_viviendo_alumno = $gra_locvive,perfil_laboral_alumno = '$gra_perlab',gra_depto = '$gra_depto',gra_piso = '$gra_piso' WHERE id_alumno = $id_Alumno;";
+		$consultas = "UPDATE alumno SET nombre_alumno = '$gra_nombre',apellido_alumno = '$gra_apellido',mail_alumno = '$gra_mail1',facebook_alumno = '$gra_facebook',numerodni_alumno = '$gra_nrodoc',tipodni_alumno = $gra_tipodoc,calle_alumno = '$gra_calle',perfilacademico_alumno = '$gra_peraca',carrera_alumno = $gra_carrera,fechanacimiento_alumno = '$gra_fecnac',numerocalle_alumno = '$gra_nrocalle',mail_alumno2 = '$gra_mail2',twitter_alumno = '$gra_twitter',localidad_nac_alumno = $gra_locnac,localidad_trabajo_alumno = $gra_loctrab,localidad_viviendo_alumno = $gra_locvive,perfil_laboral_alumno = '$gra_perlab',gra_depto = '$gra_depto',gra_piso = '$gra_piso' WHERE id_alumno = $id_Alumno;";
 	}else{
 		//LE QUITO LOS ESPACIOS AL NOMBRE DEL ARCHIVO
 		$nombre_foto = str_replace(" ", "-", $nombreFoto);
@@ -226,10 +299,10 @@ if ($id_Alumno == 0){
 			//guardo la nueva foto (nuevaFoto, destino, calidad)
 			imagepng( $imagen_final, $destino_bd, 9 );
 		}
-		$consultas = "UPDATE alumno SET nombre_alumno = '$gra_nombre',apellido_alumno = '$gra_apellido',mail_alumno = '$gra_mail1',facebook_alumno = '$gra_facebook',numerodni_alumno = '$gra_nrodoc',tipodni_alumno = $gra_tipodoc,calle_alumno = '$gra_calle',perfilacademico_alumno = '$gra_peraca',foto_alumno = '$destino_bd',carrera_alumno = $gra_carrera,ancho_final = '$ancho_final',alto_final = '$alto_final',fechanacimiento_alumno = '$gra_fecnac',numerocalle_alumno = '$gra_nrocalle',mail_alumno2 = '$gra_mail2',twitter_alumno = '$gra_twitter',provincia_nac_alumno = $gra_provnac,localidad_nac_alumno = $gra_locnac,provincia_trabajo_alumno = $gra_provtrab,localidad_trabajo_alumno = $gra_loctrab,provincia_viviendo_alumno = $gra_provive,localidad_viviendo_alumno = $gra_locvive,perfil_laboral_alumno = '$gra_perlab',gra_depto = '$gra_depto',gra_piso = '$gra_piso' WHERE id_alumno = $id_Alumno;";
+		$consultas = "UPDATE alumno SET nombre_alumno = '$gra_nombre',apellido_alumno = '$gra_apellido',mail_alumno = '$gra_mail1',facebook_alumno = '$gra_facebook',numerodni_alumno = '$gra_nrodoc',tipodni_alumno = $gra_tipodoc,calle_alumno = '$gra_calle',perfilacademico_alumno = '$gra_peraca',foto_alumno = '$destino_bd',carrera_alumno = $gra_carrera,ancho_final = '$ancho_final',alto_final = '$alto_final',fechanacimiento_alumno = '$gra_fecnac',numerocalle_alumno = '$gra_nrocalle',mail_alumno2 = '$gra_mail2',twitter_alumno = '$gra_twitter',localidad_nac_alumno = $gra_locnac,localidad_trabajo_alumno = $gra_loctrab,localidad_viviendo_alumno = $gra_locvive,perfil_laboral_alumno = '$gra_perlab',gra_depto = '$gra_depto',gra_piso = '$gra_piso' WHERE id_alumno = $id_Alumno;";
 	}
 
-	$error = guardarSql($consultas);
+	$error = guardarSql($consultas.$sqlGuardar);
 
 	include_once "cerrar_conn.php";
 	if ($error == 1){

@@ -92,7 +92,7 @@
 
 			function loadLocTrab(){
 				if(loctrab != null){
-					//nombreVar = '#ciudad option:eq('+locnac+')';
+					//nombreVar = '#gra_loctrab option:eq('+loctrab+')';
 					nombreVar = '#gra_loctrab option[value="'+loctrab+'"]';
 					$(nombreVar).prop('selected', true);
 				}
@@ -109,7 +109,9 @@
 				if(controlCarga()){
 		    
 		    		datosTel = $('#gra_duenio').val() + sep;
-					datosTel += $('#gra_caractel').val() + '-' + $('#gra_nrotel').val() + sep;
+					//datosTel += $('#gra_caractel').val() + '-' + $('#gra_nrotel').val() + sep;
+					datosTel += $('#gra_caractel').val() + sep;
+					datosTel += $('#gra_nrotel').val() + sep;
 					//datosTel += $('#gra_nrotel').val() + sep;
 					datosTel += '-1';
 
@@ -159,12 +161,21 @@
 					var vDatos = telefonos[i].split(sep);
 					htmlToAdd += '<tbody class="text-center"><tr>';
 					for(var j = 0; j < vDatos.length - 1; j++){
-						htmlToAdd += '<td>'+vDatos[j]+'</td>';
+						if (j == 0) {
+							htmlToAdd += '<td>'+vDatos[j]+'</td>';
+						}
+						if (j == 1) {
+							htmlToAdd += '<td>'+vDatos[j]+'-';	
+						}
+						if (j == 2) {
+							htmlToAdd += +vDatos[j]+'</td>';	
+						}
+						//htmlToAdd += '<td>'+vDatos[j]+'</td>';
 					}
 					htmlToAdd += '<td><button type="button" class="btn1 btn-primary btn-xs btn_add" onClick="quitarTelefono('+i+')" title="Haga click para quitar un tel&eacute;fono cargado"><i class="fa fa-minus fa-md"></i></button></td></tr></tbody>';
 				}
 
-				//$('#hiddenData').val(datosCompletos);
+				$('#hiddenLisTel').val(datosCompletos);
 				$('#tel_cargados').html(htmlToAdd);
 				limpiarCampos();
 				//$('#anio_pri').attr('hidden', true);
@@ -271,6 +282,7 @@
 
 			$(document).ready(function() {
 				ocultar_alertar();
+				mostrarDatos();
 			});
 
 		</script>
@@ -295,7 +307,7 @@ if ($id_Alumno != 0) {
 	$sqlTelefonos=traerSql('id_telefonos_del_alumno,duenio_del_telefono,caracteristica_alumno,telefono_alumno', 'telefonos_del_alumno', 'alumno_fk ='.$id_Alumno);
 	while($rowTelefonos = pg_fetch_array($sqlTelefonos)){
 		//echo 'Entro';
-		$stringEnviar = $rowTelefonos['duenio_del_telefono'].$sep.$rowTelefonos['caracteristica_alumno'].'-'.$rowTelefonos['telefono_alumno'].$sep.$rowTelefonos['id_telefonos_del_alumno'];
+		$stringEnviar = $rowTelefonos['duenio_del_telefono'].$sep.$rowTelefonos['caracteristica_alumno'].$sep.$rowTelefonos['telefono_alumno'].$sep.$rowTelefonos['id_telefonos_del_alumno'];
 		//echo $stringEnviar;
 		echo "<script>loadTelFromDB('".$stringEnviar."')</script>";
 	}
@@ -310,28 +322,17 @@ if ($id_Alumno != 0) {
 			$gra_nombre = $rowAlumno['nombre_alumno'];
 			$gra_apellido = $rowAlumno['apellido_alumno'];
 			$gra_tipodoc = $rowAlumno['tipodni_alumno'];
-			//if ($numDNI == NULL){
-				$gra_nrodoc = $rowAlumno['numerodni_alumno'];
-			//}else{
-			//	$numerodni_alumno = $numDNI;
-			//}
-			
-			$fecha_nacimiento_alumno = $rowAlumno['fechanacimiento_alumno'];
+			$gra_nrodoc = $rowAlumno['numerodni_alumno'];			
+			$gra_fecnac = $rowAlumno['fechanacimiento_alumno'];
 			$gra_carrera = $rowAlumno['carrera_alumno'];
-			// $verFecha = explode('-',$fechaNacimiento);
-			// 	$anio = $mostrar[0];
-			// 	$mes = $mostrar[1];
-			// 	$dia = $mostrar[2];
-			// $fecha_nacimiento_alumno = $dia.'-'.$mes.'-'.$anio;
 			$gra_grupo = $rowAlumno['gra_grupo'];
-			$gra_provnac = $rowAlumno['provincia_nac_alumno'];
 			$gra_locnac = $rowAlumno['localidad_nac_alumno'];
-			$gra_provtrab = $rowAlumno['provincia_trabajo_alumno'];
 			$gra_loctrab = $rowAlumno['localidad_trabajo_alumno'];
-			$gra_provive = $rowAlumno['provincia_viviendo_alumno'];
 			$gra_locvive = $rowAlumno['localidad_viviendo_alumno'];
 			$gra_calle = $rowAlumno['calle_alumno'];
 			$gra_nrocalle = $rowAlumno['numerocalle_alumno'];
+			$gra_piso = $rowAlumno['gra_piso'];
+			$gra_depto = $rowAlumno['gra_depto'];
 			$gra_mail1 = $rowAlumno['mail_alumno'];
 			$gra_mail2 = $rowAlumno['mail_alumno2'];
 			$gra_facebook = $rowAlumno['facebook_alumno'];
@@ -341,8 +342,7 @@ if ($id_Alumno != 0) {
 			//$destinoImagen = $rowAlumno['foto_alumno'];
 			//$ancho_final = $rowAlumno['ancho_final'];
 			//$alto_final = $rowAlumno['alto_final'];
-			
-			echo "<script>setLocNac('".$localidad_nac_alumno."');setLocTrab('".$localidad_trabajo_alumno."');setLocVive('".$localidad_viviendo_alumno."')</script>";
+			echo "<script>setLocNac('".$gra_locnac."');setLocTrab('".$gra_loctrab."');setLocVive('".$gra_locvive."')</script>";
 	}
 	//onchange="sacarColor('gra_nombre','alerta5')" col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1
 ?>
@@ -361,6 +361,7 @@ if ($id_Alumno != 0) {
 					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
 						<input class="form-control input-sm" name="gra_nombre" id="gra_nombre" type="text" value="<?php echo $gra_nombre; ?>" maxlength="30" title="Ingrese el nombre del graduado" autofocus />
 						<input name="idAlumno" type="hidden" value="<?php echo $id_Alumno; ?>" />
+						<input name="hiddenLisTel" type="hidden" id="hiddenLisTel" value="" />
 					</div>
 				</div>
 			</div>
@@ -459,12 +460,21 @@ if ($id_Alumno != 0) {
 						<select name="gra_grupo" class="form-control input-sm" id="cbo" title="Seleccione un grupo al que pertenece el graduado">
 						<option value="0">Seleccione un grupo...</option>
 							<?php
-								$grupo = traerSql('*','grupo_alumnos ORDER BY nombre_grupo','');
-								while($rowGrupo=pg_fetch_array($grupo)){
-									if($gra_grupo == $rowGrupo['id_grupo_alumnos']){
-										echo '<option value="'.$rowGrupo['id_grupo_alumnos'].'" selected>'.$rowGrupo['nombre_grupo'].'</option>';
-									}else{
+								if($id_Alumno == 0){
+									$grupo = traerSql('*','grupo_alumnos ORDER BY nombre_grupo','');
+									while($rowGrupo=pg_fetch_array($grupo)){
 										echo '<option value="'.$rowGrupo['id_grupo_alumnos'].'">'.$rowGrupo['nombre_grupo'].'</option>';
+									}
+								}else{
+									$id_grupo = traerDato('grupo_fk','alumnos_por_grupo', 'alumno_fk = '.$id_Alumno);
+									$grupo = traerSql('*','grupo_alumnos ORDER BY nombre_grupo', '');
+
+									while($rowGrupo=pg_fetch_array($grupo)){
+										if($id_grupo == $rowGrupo['id_grupo_alumnos']){
+											echo '<option value="'.$rowGrupo['id_grupo_alumnos'].'" selected>'.$rowGrupo['nombre_grupo'].'</option>';
+										}else{
+											echo '<option value="'.$rowGrupo['id_grupo_alumnos'].'">'.$rowGrupo['nombre_grupo'].'</option>';
+										}
 									}
 								}
 							?>
@@ -480,20 +490,20 @@ if ($id_Alumno != 0) {
 						<select name="gra_provnac" class="form-control input-sm" id="gra_provnac" onchange="if(this.value != 0){cargarLocNac(this.value)};" title="Seleccione la provincia de nacimiento del graduado">
 						<option value="0">Seleccione una provincia...</option>
 							<?php
-								$locnac=traerSql('id, nombre','provincia', NULL);
-								while($rowLocNac=pg_fetch_array($locnac)){
-									if ($modifica != 0) {
-										$sql_prov = traerSql('fk_provincia', 'localidad', 'id ='.$fk_loc_nac);
+								$provnac=traerSql('id, nombre','provincia', NULL);
+								while($rowProvNac=pg_fetch_array($provnac)){
+									if ($id_Alumno != 0) {
+										$sql_prov = traerSql('fk_provincia', 'localidad', 'id ='.$gra_locnac);
 										$rowIdProv=pg_fetch_array($sql_prov);
 											$fk_provincia = $rowIdProv['fk_provincia'];
-										if ($fk_provincia == $rowLocNac['id']){
-											echo "<option value=".$rowLocNac['id']." selected>".$rowLocNac['nombre']."</option>";
+										if ($fk_provincia == $rowProvNac['id']){
+											echo "<option value=".$rowProvNac['id']." selected>".$rowProvNac['nombre']."</option>";
 											//$fk_provincia = $rowIdProv['fk_provincia'];
 										}else{
-											echo "<option value=".$rowLocNac['id'].">".$rowLocNac['nombre']."</option>";
+											echo "<option value=".$rowProvNac['id'].">".$rowProvNac['nombre']."</option>";
 										}
 									}else{
-										echo "<option value=".$rowLocNac['id'].">".$rowLocNac['nombre']."</option>";
+										echo "<option value=".$rowProvNac['id'].">".$rowProvNac['nombre']."</option>";
 									}
 								}
 								echo '<script>cargarLocNac('.$fk_provincia.')</script>';
@@ -520,20 +530,20 @@ if ($id_Alumno != 0) {
 						<select name="gra_provtrab" class="form-control input-sm" id="gra_provtrab" onchange="if(this.value != 0){cargarLocTrab(this.value)};" title="Seleccione la provincia d&oacute;nde trabaja el graduado">
 						<option value="0">Seleccione una provincia...</option>
 							<?php
-								$provnac=traerSql('id, nombre','provincia', NULL);
-								while($rowProvNac=pg_fetch_array($provnac)){
-									if ($modifica != 0) {
-										$sql_prov = traerSql('fk_provincia', 'localidad', 'id ='.$fk_loc_nac);
+								$provtrab=traerSql('id, nombre','provincia', NULL);
+								while($rowProvTrab=pg_fetch_array($provtrab)){
+									if ($id_Alumno != 0) {
+										$sql_prov = traerSql('fk_provincia', 'localidad', 'id ='.$gra_loctrab);
 										$rowIdProv=pg_fetch_array($sql_prov);
 											$fk_provincia = $rowIdProv['fk_provincia'];
-										if ($fk_provincia == $rowProvNac['id']){
-											echo "<option value=".$rowProvNac['id']." selected>".$rowProvNac['nombre']."</option>";
+										if ($fk_provincia == $rowProvTrab['id']){
+											echo "<option value=".$rowProvTrab['id']." selected>".$rowProvTrab['nombre']."</option>";
 											//$fk_provincia = $rowIdProv['fk_provincia'];
 										}else{
-											echo "<option value=".$rowProvNac['id'].">".$rowProvNac['nombre']."</option>";
+											echo "<option value=".$rowProvTrab['id'].">".$rowProvTrab['nombre']."</option>";
 										}
 									}else{
-										echo "<option value=".$rowProvNac['id'].">".$rowProvNac['nombre']."</option>";
+										echo "<option value=".$rowProvTrab['id'].">".$rowProvTrab['nombre']."</option>";
 									}
 								}
 								echo '<script>cargarLocTrab('.$fk_provincia.')</script>';
@@ -562,8 +572,8 @@ if ($id_Alumno != 0) {
 							<?php
 								$provive=traerSql('id, nombre','provincia', NULL);
 								while($rowProVive=pg_fetch_array($provive)){
-									if ($modifica != 0) {
-										$sql_prov = traerSql('fk_provincia', 'localidad', 'id ='.$fk_loc_nac);
+									if ($id_Alumno != 0) {
+										$sql_prov = traerSql('fk_provincia', 'localidad', 'id ='.$gra_locvive);
 										$rowIdProv=pg_fetch_array($sql_prov);
 											$fk_provincia = $rowIdProv['fk_provincia'];
 										if ($fk_provincia == $rowProVive['id']){
@@ -652,7 +662,7 @@ if ($id_Alumno != 0) {
 				<div class="form-group">
 					<label for="gra_twitter" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Twitter:</label>
 					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
-						<input class="form-control input-sm" name="gra_twitter" id="gra_twitter" type="email" value="<?php echo $gra_twitter; ?>" maxlength="20" title="Ingrese el twitter del graduado"/>
+						<input class="form-control input-sm" name="gra_twitter" id="gra_twitter" type="text" value="<?php echo $gra_twitter; ?>" maxlength="20" title="Ingrese el twitter del graduado"/>
 					</div>
 				</div>
 			</div>

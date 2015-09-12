@@ -45,6 +45,12 @@ function traerSql($rango,$tabla,$condicion){
     return $sql;
 }
 
+function traerDato($dato, $tabla, $condicion){
+    $sqlDato = pg_query("SELECT $dato AS ".'"dato"'." FROM $tabla WHERE ".$condicion);
+    $rowDato = pg_fetch_array($sqlDato);
+    return $rowDato['dato'];
+}
+
 function traerId($id, $tabla){
 	$sqlId = pg_query('SELECT max('.$id.') FROM '.$tabla);
 	$rowId = pg_fetch_array($sqlId);

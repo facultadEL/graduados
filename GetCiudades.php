@@ -5,7 +5,7 @@
 	//conexion local
 	$conn = pg_connect("host=localhost port=5432 user=postgres password=postgres dbname=graduados") or die("Error de conexion.".pg_last_error());
 
-$htmlProvincias = '<option value="0">Seleccione la ciudad</option>';
+$htmlProvincias = '';
 
 $idProvincia = $_POST['idProvincia'];
 
