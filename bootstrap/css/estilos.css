@@ -96,3 +96,43 @@ legend {
 .separar{
 	margin-top: 40px !important;
 }
+
+/* ---------------------------------------------------------------------------------------
+    Botón Cancelar.
+------------------------------------------------------------------------------------------*/
+.btn_cancelar{
+    font-size: 15px !important;
+    font-weight: bolder !important;
+    color: #ac000c !important;
+    background: #fff !important;
+    padding:0.6% 1% !important;
+    border: 2px Solid #ac000c !important;
+}
+.btn_cancelar:hover{
+    color: #fff !important;
+    background: #ac000c !important;
+}
+.btn_cancelar:active{
+    color: #000 !important;
+    background: #ac000c !important;
+}
+
+/* ---------------------------------------------------------------------------------------
+    Botón Guardar.
+------------------------------------------------------------------------------------------*/
+.btn_guardar{
+    font-size: 15px !important;
+    font-weight: bolder !important;
+    color: #006249 !important;
+    background: #fff !important;
+    padding:0.6% 1% !important;
+    border: 2px Solid #006249 !important;
+}
+.btn_guardar:hover{
+    color: #fff !important;
+    background: #006249 !important;
+}
+.btn_guardar:active{
+    color: #000 !important;
+    background: #006249 !important;
+}

@@ -79,7 +79,7 @@
 			}
 
 			function setLocVive(idCiudadVive){
-				ciudadVive = idCiudadVive;
+				locVive = idCiudadVive;
 			}
 
 			function loadLocNac(){
@@ -346,7 +346,7 @@ if ($id_Alumno != 0) {
 	}
 	//onchange="sacarColor('gra_nombre','alerta5')" col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1
 ?>
-	<form name="f1" id="f1" action="registrarDatosGraduado.php" method="post" id="encuesta" class="form-horizontal" enctype="multipart/form-data">
+	<form name="f1" id="f1" action="registrarDatosGraduado.php" method="post" class="form-horizontal" enctype="multipart/form-data">
 		<header>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -378,7 +378,7 @@ if ($id_Alumno != 0) {
 			<div class="row">
 				<div class="form-group">
 					<label for="gra_tipodoc" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Tipo Doc.:</label>
-					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+					<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
 						<select name="gra_tipodoc" class="form-control input-sm" id="cbo" title="Seleccione el tipo de documento del graduado">
 							<?php
 								$tipodoc = traerSql('*','tipo_dni','');
@@ -389,7 +389,7 @@ if ($id_Alumno != 0) {
 						</select>
 					</div>
 
-					<label for="gra_nrodoc" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-2 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 text-right">Nro. Doc.:</label>
+					<label for="gra_nrodoc" class="control-label col-xs-3 col-sm-2 col-md-2 col-lg-2 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 text-right">Nro. Doc.:</label>
 					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<input class="form-control input-sm" name="gra_nrodoc" id="gra_nrodoc" type="text" value="<?php echo $gra_nrodoc; ?>" pattern="([0-9]{1}|[0-9]{2})[0-9]{3}[0-9]{3}" maxlength="8" title="Ingrese el n&uacute;mero de documento del graduado"/>
 					</div>
@@ -705,13 +705,13 @@ if ($id_Alumno != 0) {
 			<div class="row">
 				<div class="form-group" id="error">
 					<label for="gra_caractel" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Tel.:</label>
-					<div class="col-xs-2 col-sm-1 col-md-1 col-lg-1">
+					<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
 						<input class="form-control input-sm" name="gra_caractel" id="gra_caractel" type="text" onkeyup="sacarColor('#error','#a_carac')" onkeydown="return soloNumero(event);" onblur="validarLargoTel('#gra_caractel','#a_carac',2,4);" pattern="[1-9]{0,4}" value="<?php echo $gra_caractel; ?>" maxlength="4" title="Ingrese la caracter&iacute;stica (sin 0) del n&uacute;mero de tel&eacute;fono o celular"/>
 					</div>
-					<div class="col-xs-2 col-sm-3 col-md-2 col-lg-2">
+					<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
 						<input class="form-control input-sm" name="gra_nrotel" id="gra_nrotel" type="text" onkeyup="sacarColor('#error','')" onkeydown="return soloNumero(event);" onblur="validarLargoTel('#gra_nrotel','#a_tel',6,8);" pattern="[0-9]{0,8}" value="<?php echo $gra_nrotel; ?>" maxlength="8" title="Ingrese el n&uacute;mero (sin el 15) de tel&eacute;fono o celular"/>
 					</div>
-					<div class="col-xs-4 col-sm-4 col-md-5 col-lg-5">
+					<div class="col-xs-3 col-sm-3 col-md-5 col-lg-5">
 						<input class="form-control input-sm" name="gra_duenio" id="gra_duenio" type="text" onkeyup="sacarColor('#error','#a_duenio')" pattern="[0-9]{0,8}" placeholder="Due&ntilde;o/a del tel&eacute;fono cargado" value="<?php echo $gra_duenio; ?>" maxlength="30" title="Ingrese a quien pertenece el n&uacute;mero cargado"/>
 					</div>
 					<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
@@ -770,8 +770,8 @@ if ($id_Alumno != 0) {
 			
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-					<a href="listadoAlumno.php"><button type="button" class="btn btn-default"><i class="fa fa-arrow-left fa-lg"></i>&nbsp;&nbsp;Atr&aacute;s</button></a>
-					<button type="submit" class="btn btn-success"><i class="fa fa-floppy-o fa-lg"></i>&nbsp;&nbsp;Guardar</button>
+					<a href="listadoAlumno.php"><button type="button" class="btn btn-default btn_cancelar"><i class="fa fa-arrow-left fa-lg"></i>&nbsp;&nbsp;Atr&aacute;s</button></a>
+					<button type="submit" class="btn btn-default btn_guardar"><i class="fa fa-floppy-o fa-lg"></i>&nbsp;&nbsp;Guardar</button>
 				</div>
 			</div>
 		</div>

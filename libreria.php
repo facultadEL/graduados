@@ -58,10 +58,10 @@ function traerId($id, $tabla){
 	return $maxId;
 }
 
-function traerUltimo($tabla){
-    $sqlId = pg_query('SELECT max(id) FROM '.$tabla);
+function traerUltimo($campo,$tabla){
+    $sqlId = pg_query('SELECT max('.$campo.') AS ultimo FROM '.$tabla);
     $rowId = pg_fetch_array($sqlId);
-    $maxId = $rowId['max'];
+    $maxId = $rowId['ultimo'];
     return $maxId;
 }
 
