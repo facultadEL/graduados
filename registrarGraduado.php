@@ -1,7 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="es">
-	<title>Registro de Graduado</title>
-	<?php include_once "basicos/head.html"; ?>
+	<head>
+		<title>Registro de Graduado</title>
+		<?php include_once "basicos/head.html"; ?>
+	</head>
 		<script defer>
 			var locnac = null;
 			var loctrab = null;
@@ -355,27 +357,20 @@ if ($id_Alumno != 0) {
 			</div>
 		</header>
 		<div class="panel-body">
-			<div class="row">
-				<div class="form-group">
-					<label for="gra_nombre" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Nombre:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
-						<input class="form-control input-sm" name="gra_nombre" id="gra_nombre" type="text" value="<?php echo $gra_nombre; ?>" maxlength="30" title="Ingrese el nombre del graduado" autofocus />
-						<input name="idAlumno" type="hidden" value="<?php echo $id_Alumno; ?>" />
-						<input name="hiddenLisTel" type="hidden" id="hiddenLisTel" value="" />
-					</div>
+			<div class="form-group">
+				<label for="gra_nombre" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Nombre:</label>
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<input class="form-control input-sm" name="gra_nombre" id="gra_nombre" type="text" value="<?php echo $gra_nombre; ?>" maxlength="30" title="Ingrese el nombre del graduado" autofocus />
+					<input name="idAlumno" type="hidden" value="<?php echo $id_Alumno; ?>" />
+					<input name="hiddenLisTel" type="hidden" id="hiddenLisTel" value="" />
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group">
-					<label for="gra_apellido" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Apellido:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
-						<input class="form-control input-sm" name="gra_apellido" id="gra_apellido" type="text" value="<?php echo $gra_apellido; ?>" maxlength="30" title="Ingrese el apellido del graduado"/>
-					</div>
-				</div>
+				<label for="gra_apellido" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Apellido:</label>
+				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					<input class="form-control input-sm" name="gra_apellido" id="gra_apellido" type="text" value="<?php echo $gra_apellido; ?>" maxlength="30" title="Ingrese el apellido del graduado"/>
+				</div>	
 			</div>
 				
-			<div class="row">
 				<div class="form-group">
 					<label for="gra_tipodoc" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Tipo Doc.:</label>
 					<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
@@ -389,39 +384,33 @@ if ($id_Alumno != 0) {
 						</select>
 					</div>
 
-					<label for="gra_nrodoc" class="control-label col-xs-3 col-sm-2 col-md-2 col-lg-2 col-sm-offset-1 col-md-offset-1 col-lg-offset-1 text-right">Nro. Doc.:</label>
+					<label for="gra_nrodoc" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 col-xs-offset-1 col-sm-offset-2 col-md-offset-2 col-lg-offset-2 text-right">Nro. Doc.:</label>
 					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<input class="form-control input-sm" name="gra_nrodoc" id="gra_nrodoc" type="text" value="<?php echo $gra_nrodoc; ?>" pattern="([0-9]{1}|[0-9]{2})[0-9]{3}[0-9]{3}" maxlength="8" title="Ingrese el n&uacute;mero de documento del graduado"/>
 					</div>
 				</div>
-			</div>
 
-			<div class="row">
 				<div class="form-group">
 					<label for="gra_fecnac" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Fec. Nac.:</label>
-					<div class="col-xs-4 col-sm-3 col-md-3 col-lg-3">
+					<div class="col-xs-5 col-sm-4 col-md-2 col-lg-2">
 						<input class="form-control input-sm" name="gra_fecnac" id="gra_fecnac" type="date" value="<?php echo $gra_fecnac; ?>" maxlength="10" title="Ingrese la fecha de nacimiento del graduado" />
 					</div>
 				</div>
+
+			<div class=" col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">
+					<h4 class="pregrado"><i class="fa fa-square fa-lg"></i>Pregrado</h4>						
+			</div>
+			<div class=" col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
+					<h4 class="grado"><i class="fa fa-square fa-lg"></i>Grado</h4>
+			</div>
+			<div class=" col-xs-4 col-sm-4 col-md-4 col-lg-4 text-left">
+					<h4 class="posgrado"><i class="fa fa-square fa-lg"></i>Posgrado</h4>
 			</div>
 
-			<div class="row ">
-				<div class=" col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">
-						<h4 class="pregrado"><i class="fa fa-square fa-lg"></i>Pregrado</h4>						
-				</div>
-				<div class=" col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-						<h4 class="grado"><i class="fa fa-square fa-lg"></i>Grado</h4>
-				</div>
-				<div class=" col-xs-4 col-sm-4 col-md-4 col-lg-4 text-left">
-						<h4 class="posgrado"><i class="fa fa-square fa-lg"></i>Posgrado</h4>
-
-				</div>
-			</div>
-
-			<div class="row">
+			
 				<div class="form-group">
 					<label for="gra_carrera" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Carrera:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<select name="gra_carrera" class="form-control input-sm" id="cbo" title="Seleccione el tipo de documento del graduado">
 						<option value="0">Seleccione una carrera...</option>
 							<?php
@@ -450,13 +439,9 @@ if ($id_Alumno != 0) {
 							?>
 						</select>
 					</div>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group">
 					<label for="gra_grupo" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Grupo:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<select name="gra_grupo" class="form-control input-sm" id="cbo" title="Seleccione un grupo al que pertenece el graduado">
 						<option value="0">Seleccione un grupo...</option>
 							<?php
@@ -481,12 +466,10 @@ if ($id_Alumno != 0) {
 						</select>
 					</div>
 				</div>
-			</div>
 			
-			<div class="row">
 				<div class="form-group">
 					<label for="gra_provnac" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Prov. Nac.:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<select name="gra_provnac" class="form-control input-sm" id="gra_provnac" onchange="if(this.value != 0){cargarLocNac(this.value)};" title="Seleccione la provincia de nacimiento del graduado">
 						<option value="0">Seleccione una provincia...</option>
 							<?php
@@ -510,23 +493,17 @@ if ($id_Alumno != 0) {
 							?>
 						</select>
 					</div>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="form-group">
+				
 					<label for="gra_locnac" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Loc. Nac.:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<select name="gra_locnac" class="form-control input-sm" id="gra_locnac" title="Seleccione la localidad de nacimiento del graduado">
 						</select>
 					</div>
 				</div>
-			</div>
 
-			<div class="row">
 				<div class="form-group">
 					<label for="gra_provtrab" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Prov. Trab.:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<select name="gra_provtrab" class="form-control input-sm" id="gra_provtrab" onchange="if(this.value != 0){cargarLocTrab(this.value)};" title="Seleccione la provincia d&oacute;nde trabaja el graduado">
 						<option value="0">Seleccione una provincia...</option>
 							<?php
@@ -550,23 +527,17 @@ if ($id_Alumno != 0) {
 							?>
 						</select>
 					</div>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group">
 					<label for="gra_loctrab" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Loc. Trab.:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<select name="gra_loctrab" class="form-control input-sm" id="gra_loctrab" title="Seleccione la localidad d&oacute;nde trabaja el graduado">
 						</select>
 					</div>
 				</div>
-			</div>
 
-			<div class="row">
 				<div class="form-group">
 					<label for="gra_provive" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Prov. Vive:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<select name="gra_provive" class="form-control input-sm" id="gra_provive" onchange="if(this.value != 0){cargarLocVive(this.value)};" title="Seleccione la provincia d&oacute;nde vive el graduado">
 						<option value="0">Seleccione una provincia...</option>
 							<?php
@@ -590,29 +561,21 @@ if ($id_Alumno != 0) {
 							?>
 						</select>
 					</div>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group">
 					<label for="gra_locvive" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Loc. Vive:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<select name="gra_locvive" class="form-control input-sm" id="gra_locvive" title="Seleccione la localidad d&oacute;nde vive el graduado">
 						</select>
 					</div>
 				</div>
-			</div>
 			
-			<div class="row">
 				<div class="form-group">
 					<label for="gra_calle" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Calle:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 						<input class="form-control input-sm" name="gra_calle" id="gra_calle" type="text" value="<?php echo $gra_calle; ?>" maxlength="40" title="Ingrese la calle del graduado" />
 					</div>
 				</div>
-			</div>
 
-			<div class="row">
 				<div class="form-group">
 					<label for="gra_nrocalle" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Nro.:</label>
 					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
@@ -629,151 +592,128 @@ if ($id_Alumno != 0) {
 						<input class="form-control input-sm" name="gra_piso" id="gra_piso" type="text" pattern="[0-9]{0,3}" value="<?php echo $gra_piso; ?>" maxlength="3" title="Ingrese el piso del domicilio"/>
 					</div>
 				</div>
-			</div>
 
-			<div class="row">
 				<div class="form-group">
 					<label for="gra_mail1" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Mail 1:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<input class="form-control input-sm" name="gra_mail1" id="gra_mail1" type="email" value="<?php echo $gra_mail1; ?>" maxlength="60" title="Ingrese el mail del graduado" />
 					</div>
-				</div>
-			</div>
-			
-			<div class="row">
-				<div class="form-group">
+
 					<label for="gra_mail2" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Mail 2:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<input class="form-control input-sm" name="gra_mail2" id="gra_mail2" type="email" value="<?php echo $gra_mail2; ?>" maxlength="60" title="Ingrese el mail secundario del graduado"/>
 					</div>
 				</div>
-			</div>
 
-			<div class="row">
 				<div class="form-group">
 					<label for="gra_facebook" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Facebook:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<input class="form-control input-sm" name="gra_facebook" id="gra_facebook" type="text" value="<?php echo $gra_facebook; ?>" maxlength="40" title="Ingrese el facebook del graduado" />
 					</div>
-				</div>
-			</div>
 
-			<div class="row">
-				<div class="form-group">
 					<label for="gra_twitter" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Twitter:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<input class="form-control input-sm" name="gra_twitter" id="gra_twitter" type="text" value="<?php echo $gra_twitter; ?>" maxlength="20" title="Ingrese el twitter del graduado"/>
 					</div>
 				</div>
-			</div>
 
 			<!--ALERTAS DE ERRORES --------------------------------------------------------------------------  -->
-			<div class="row">
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+			
+				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 					<div class="alert alert-danger text-center" id="a_vacio">
 						<strong>Atenci&oacute;n:</strong> Debe cargar los tres datos del tel&eacute;fono.
 					</div>
 				</div>
-			</div>
+			
 
-			<div class="row">
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+			
+				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 					<div class="alert alert-danger text-center" id="a_carac">
 						<strong>Atenci&oacute;n:</strong> Ingrese la caracter&iacute;stica (sin 0) del n&uacute;mero de tel&eacute;fono o celular.
 					</div>
 				</div>
-			</div>
+			
 
-			<div class="row">
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+			
+				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 					<div class="alert alert-danger text-center" id="a_tel">
 						<strong>Atenci&oacute;n:</strong> Ingrese el n&uacute;mero (sin el 15) de tel&eacute;fono o celular y debe contener m&iacute;nimo de 6 d&iacute;gitos y 8 como m&aacute;ximo.
 					</div>
 				</div>
-			</div>
 			
-			<div class="row">
-				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+			
+			
+				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1">
 					<div class="alert alert-danger text-center" id="a_duenio">
 						<strong>Atenci&oacute;n:</strong> Ingrese a quien pertenece el n&uacute;mero cargado.
 					</div>
 				</div>
-			</div>
-
+			
+				
+				<div class="form-group">
+					<label for="gra_foto" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Foto:</label>
+					<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+						<input class="input-sm" name="gra_foto" id="gra_foto" type="file" onchange="validarArchivo();" title="Cargue una foto del graduado" />
+					</div>
+				</div>
 			<!-------------------------------------------------------------------------------------  -->
 
-			<div class="row">
-				<div class="form-group" id="error">
+				<div class="form-group " id="error">
 					<label for="gra_caractel" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Tel.:</label>
-					<div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
-						<input class="form-control input-sm" name="gra_caractel" id="gra_caractel" type="text" onkeyup="sacarColor('#error','#a_carac')" onkeydown="return soloNumero(event);" onblur="validarLargoTel('#gra_caractel','#a_carac',2,4);" pattern="[1-9]{0,4}" value="<?php echo $gra_caractel; ?>" maxlength="4" title="Ingrese la caracter&iacute;stica (sin 0) del n&uacute;mero de tel&eacute;fono o celular"/>
+					<div class="col-xs-2 col-sm-2 col-md-2 col-lg-1">
+						<input class="form-control input-sm" name="gra_caractel" id="gra_caractel" type="text" onkeyup="sacarColor('#error','#a_carac')" onkeydown="return soloNumero(event);" onblur="validarLargoTel('#gra_caractel','#a_carac',2,4);" pattern="[1-9]{0,4}" value="<?php echo $gra_caractel; ?>" maxlength="4" title="Ingrese la caracter&iacute;stica (sin 0) del n&uacute;mero de tel&eacute;fono o celular" />
 					</div>
 					<div class="col-xs-3 col-sm-3 col-md-2 col-lg-2">
 						<input class="form-control input-sm" name="gra_nrotel" id="gra_nrotel" type="text" onkeyup="sacarColor('#error','')" onkeydown="return soloNumero(event);" onblur="validarLargoTel('#gra_nrotel','#a_tel',6,8);" pattern="[0-9]{0,8}" value="<?php echo $gra_nrotel; ?>" maxlength="8" title="Ingrese el n&uacute;mero (sin el 15) de tel&eacute;fono o celular"/>
 					</div>
-					<div class="col-xs-3 col-sm-3 col-md-5 col-lg-5">
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-5">
 						<input class="form-control input-sm" name="gra_duenio" id="gra_duenio" type="text" onkeyup="sacarColor('#error','#a_duenio')" pattern="[0-9]{0,8}" placeholder="Due&ntilde;o/a del tel&eacute;fono cargado" value="<?php echo $gra_duenio; ?>" maxlength="30" title="Ingrese a quien pertenece el n&uacute;mero cargado"/>
 					</div>
-					<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+					<div class="col-xs-1 col-sm-1 col-md-2 col-lg-2">
 						<button type="button" class="btn1 btn-primary btn-xs btn_add" onclick="addTel()" title="Haga click para agregar un tel&eacute;fono"><i class="fa fa-plus-circle fa-md"></i></button>
 					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
-					<center>
-						<table class="table table-striped table-condensed table-bordered table-hover" id="tel_cargados">
-						</table>
-					</center>
+				<div class="form-group">
+					<table class="table table-striped table-condensed table-bordered table-hover" id="tel_cargados"></table>
 				</div>
-			</div>
 
 			<!--ALERTAS DE ERRORES --------------------------------------------------------------------------  -->
 
-			<div class="row">
+			
 				<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
 					<div class="alert alert-danger text-center" id="a_foto">
 						<strong>Atenci&oacute;n:</strong> debe cargar un archivo "jpg", "jpeg" o "png".
 					</div>
 				</div>
-			</div>
+			
 
 			<!-------------------------------------------------------------------------------------  -->
 
-			<div class="row">
-				<div class="form-group">
-					<label for="gra_foto" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Foto:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
-						<input class="input-sm" name="gra_foto" id="gra_foto" type="file" onchange="validarArchivo();" title="Cargue una foto del graduado" />
-					</div>
-				</div>
-			</div>
+			
 
-			<div class="row">
+			<div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<div class="form-group">
 					<label for="gra_peraca" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Perfil Aca.:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 						<textarea class="form-control input-sm" name="gra_peraca" id="gra_peraca" value="" rows="5" title="Ingrese el perfil acad&eacute;mico del graduado"><?php echo $gra_peraca; ?></textarea>
 					</div>
 				</div>
-			</div>
-
-			<div class="row">
+				
 				<div class="form-group">
 					<label for="gra_perlab" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Perfil Lab.:</label>
-					<div class="col-xs-10 col-sm-9 col-md-9 col-lg-9">
+					<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 						<textarea class="form-control input-sm" name="gra_perlab" id="gra_perlab" value="" rows="5" title="Ingrese el perfil laboral del graduado"><?php echo $gra_perlab; ?></textarea>
 					</div>
 				</div>
 			</div>
 			
-			<div class="row">
+			
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
 					<a href="listadoAlumno.php"><button type="button" class="btn btn-default btn_cancelar"><i class="fa fa-arrow-left fa-lg"></i>&nbsp;&nbsp;Atr&aacute;s</button></a>
 					<button type="submit" class="btn btn-default btn_guardar"><i class="fa fa-floppy-o fa-lg"></i>&nbsp;&nbsp;Guardar</button>
 				</div>
-			</div>
+			
 		</div>
 </form>
 </body>

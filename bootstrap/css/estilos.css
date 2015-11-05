@@ -24,13 +24,13 @@ legend {
     border-bottom: 1px solid #205fb2 !important;
 }
 
-.btn {
-    display: inline-block;
-    padding: 8px 14px !important;
-    margin-top: 20px;
-    margin-bottom: 30px;
-    font-size: 15px !important;
-    font-weight: bold !important;
+.lupa{
+	padding: 9px 14px !important;
+}
+
+.btn_separar{
+	margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 
@@ -105,7 +105,6 @@ legend {
     font-weight: bolder !important;
     color: #ac000c !important;
     background: #fff !important;
-    padding:0.6% 1% !important;
     border: 2px Solid #ac000c !important;
 }
 .btn_cancelar:hover{
@@ -125,7 +124,6 @@ legend {
     font-weight: bolder !important;
     color: #006249 !important;
     background: #fff !important;
-    padding:0.6% 1% !important;
     border: 2px Solid #006249 !important;
 }
 .btn_guardar:hover{
@@ -135,4 +133,18 @@ legend {
 .btn_guardar:active{
     color: #000 !important;
     background: #006249 !important;
+}
+
+a:link, a:active, a:visited, a:focus{
+	color:#777; /* color de los botones de la noticia */
+}
+a:hover{
+	color: #444 !important; /* hover de los botones de la noticia */
+}
+
+.user{
+	color: #286090 !important; /* color de los botones de la noticia */
+}
+.user:hover{
+	color: #3585c6 !important; /* hover de los botones de la noticia */
 }
