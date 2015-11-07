@@ -4,6 +4,13 @@
 		<?php include_once "basicos/head.html"; ?>
 		<title>Listado Graduados</title>
 		<script defer>
+			//var listaGraduados = '';
+			var listaGraduados = {};
+			var separador = '/--/';
+			var separador2 = '/--/--/';
+			var separador3 = '/--/--/--/';
+			var foto = '';
+
 			function filtraData(from){
 
 				var parametros = {
@@ -18,7 +25,8 @@
 					data: parametros,
 					async: false,
 					success:  function (response) { //Funcion que ejecuta si todo pasa bien. El response es los datos que manda el otro archivo
-						$('#filtroConsulta').html(response);
+						cargarGraduado(response);
+						controlBusqueda();
 		            },
 					error: function (msg) {
 						alert('Error al realizar la consulta.');
@@ -28,30 +36,100 @@
 				});
 			}
 
+			var datos = '';
+			var cont = '';
+			function cargarGraduado(datosAjax){
+				datos = datosAjax.split(separador3);
+				cont = datos[1].split(separador2);
+				for(var i = 0; i < datos[0]; i++){
+					listaGraduados[i] = cont[i];
+				}
+			}
+
+			function controlBusqueda()
+			{
+				if(($('#palabra').val()) == '' || ($('#palabra').val()) == null)
+				{
+					//filtraData();
+					mostrarGraduado(false);
+				}
+				else
+				{
+					mostrarGraduado(true);
+				}
+			}
+
+			function mostrarGraduado(busqueda)
+			{
+				var graduadosToAdd = '';
+				var graduadosToAdd1 = '';
+				var noHay = '';
+				var graduadoEncontrado = false;
+				var contar = 0;
+
+				if(busqueda == false)
+				{	
+					$.each(listaGraduados, function(key,value){
+						var vCampos = value.toLowerCase().split(separador);
+						contar++;
+						if (vCampos[1] == '') {
+							foto = '<i class="fa fa-user fa-2x user"></i>';
+						}else{
+							foto = '<img src="'+vCampos[1]+'" width="50" height="50">';
+						}
+						graduadosToAdd += '<tr><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'"><i class="fa fa-eye fa-2x"></i></a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'"><i class="fa fa-refresh fa-2x"></i></a></td></tr>';
+					});
+				}else{
+					palabraABuscar = ($('#palabra').val()).toLowerCase();
+					//graduadoEncontrado = false;
+					$.each(listaGraduados, function(key,value){
+						var vCampos = value.toLowerCase().split(separador);
+						for(var i = 0; i < vCampos.length; i++)
+						{
+							if(i != 0)
+							{
+								if(vCampos[2].indexOf(palabraABuscar) != -1 || vCampos[3].indexOf(palabraABuscar) != -1 || vCampos[7].indexOf(palabraABuscar) != -1)
+								{
+									//graduadoEncontrado = true;
+
+									contar++;
+									if (vCampos[1] == '') {
+										foto = '<i class="fa fa-user fa-2x user"></i>';
+									}else{
+										foto = '<img src="'+vCampos[1]+'" width="50" height="50">';
+									}
+									graduadosToAdd += '<tr><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'"><i class="fa fa-eye fa-2x"></i></a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'"><i class="fa fa-refresh fa-2x"></i></a></td></tr>';
+
+									break;
+								}
+							}
+						}
+						// if(graduadoEncontrado == true)
+						// {
+						// 	contar++;
+						// 	if (vCampos[1] == '') {
+						// 		foto = '<i class="fa fa-user fa-2x user"></i>';
+						// 	}else{
+						// 		foto = '<img src="'+vCampos[1]+'" width="50" height="50">';
+						// 	}
+						// 	graduadosToAdd += '<tr><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'"><i class="fa fa-eye fa-2x"></i></a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'"><i class="fa fa-refresh fa-2x"></i></a></td></tr>';
+						// }
+						//graduadosToAdd += '<tr><td class="text-center" colspan="7">No hay registros</td></tr>';
+						//$('#filtroConsulta').html(graduadosToAdd);
+					});
+				}
+				$('#filtroConsulta').html(graduadosToAdd);
+			}
+
 
 			$(document).ready(function() {
 				filtraData();
+				//controlBusqueda();
 			});
-
-			// $(document.body).on('hidden.bs.modal', function () {
-			//     $('#login-modal').removeData('bs.modal')
-			// });
 		</script>
 	</head>
 	<body class="container-fluid">
 		<div class="separar"></div>
-		<form class="form-horizontal" id="busqueda" name="buscador" action="busqueda.php" method="post">
-			<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xs-offset-0 col-sm-offset-0 col-md-offset-2 col-lg-offset-2">
-				<div class="form-group text-center">
-					<div class="input-group">
-						<span class="input-group-btn" title="Presione aqu&iacute; para buscar">
-							<button class="btn btn-primary lupa" type="submit"><i class="fa fa-search fa-lg"></i></button>
-						</span>
-						<input type="text" class="form-control" placeholder="Buscar por..." name="palabra" id="palabra" required autofocus />
-					</div>
-				</div>
-			</div>
-		</form>
 		<div class="row">
 			<div class="col-xs-10 col-sm-10 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-2 col-lg-offset-2">
 				<h3 class="text-center">
@@ -85,6 +163,29 @@
 				</h3>
 			</div>
 		</div>
+		<!-- <form class="form-horizontal" id="busqueda" name="buscador" action="busqueda.php" method="post"> -->
+		<div class="row separar_search">
+			<div class="col-xs-10 col-sm-10 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-2 col-lg-offset-2">
+				<div class="form-group">
+					<div class="input-group">
+						<span class="input-group-btn" title="Presione aqu&iacute; para buscar">
+							<button class="btn btn-primary lupa" type="submit"><i class="fa fa-search fa-lg"></i></button>
+						</span>
+						<input type="text" class="form-control" placeholder="Buscar por Nombre, Apellido o DNI" name="palabra" onchange="controlBusqueda()" onKeyUp="controlBusqueda()" id="palabra" required autofocus />
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- </form> -->
+<!-- 		<div class="text-center" id="tablamuestra1">
+
+		</div>
+		<div class="text-center" id="tablamuestra2">
+
+		</div>
+		<div class="text-center" id="tablamuestra3">
+
+		</div> -->
 		<div class="text-center">
 			<a href="imprimirListadoGraduados.php?control=0">
 				<input type="button" class="btn btn_separar btn-primary" value="Imprimir" />
