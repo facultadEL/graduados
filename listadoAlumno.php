@@ -12,9 +12,8 @@
 			var foto = '';
 
 			function filtraData(from){
-
+				listaGraduados = {};
 				var parametros = {
-		            "from" : from,
 		            "cbo_grado" : $('#cbo_grado').val(),
 		            "cbo_carrera" : $('#cbo_carrera').val()
 		    	};
@@ -133,7 +132,7 @@
 		<div class="row">
 			<div class="col-xs-10 col-sm-10 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-2 col-lg-offset-2">
 				<h3 class="text-center">
-					<select name="cbo_grado" class="form-control" id="cbo_grado" onchange="filtraData('1');" title="Filtrar por nivel de carrera" >
+					<select name="cbo_grado" class="form-control" id="cbo_grado" onchange="filtraData();" title="Filtrar por nivel de carrera" >
 						<option value="0">Filtrar por nivel...</option>
 						<?php
 							include_once "conexion.php";
@@ -151,7 +150,7 @@
 		<div class="row">
 			<div class="col-xs-10 col-sm-10 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-2 col-lg-offset-2">
 				<h3 class="text-center">
-					<select name="cbo_carrera" class="form-control" id="cbo_carrera" onchange="filtraData('2');" title="Filtrar por carrera" >
+					<select name="cbo_carrera" class="form-control" id="cbo_carrera" onchange="filtraData();" title="Filtrar por carrera" >
 						<option value="0">Filtrar por carrera...</option>
 						<?php
 							$car = traerSql('id_carrera,nombre_carrera','carrera ORDER BY id_carrera','');
@@ -176,16 +175,7 @@
 				</div>
 			</div>
 		</div>
-		<!-- </form> -->
-<!-- 		<div class="text-center" id="tablamuestra1">
 
-		</div>
-		<div class="text-center" id="tablamuestra2">
-
-		</div>
-		<div class="text-center" id="tablamuestra3">
-
-		</div> -->
 		<div class="text-center">
 			<a href="imprimirListadoGraduados.php?control=0">
 				<input type="button" class="btn btn_separar btn-primary" value="Imprimir" />

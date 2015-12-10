@@ -21,30 +21,14 @@ header("content-disposition: attachment;filename=ExcelAlumnos.xls");
 	l2 {font-family: Cambria;color: #424242; text-transform: capitalize; padding: .12em;font-size: 0.7em}
 </style>
 </head>
-<body link="#000000" vlink="#000000" alink="#FFFFFF" onload=print()>
+<body link="#000000" vlink="#000000" alink="#FFFFFF">
 <?php
 include_once 'conexion.php';
-$control = $_REQUEST['control'];
-if($control == 1){
-	$palabra = $_REQUEST['palabra'];
-	if ($palabra == "grado" || $palabra == "Grado"){
-		$sqlBuscar = pg_query("SELECT id_alumno,nombre_alumno,apellido_alumno, numerodni_alumno,nombre_nivel_carrera,carrera.nombre_carrera,id_nivel_carrera,provincia_viviendo_alumno,localidad_viviendo_alumno,calle_alumno,numerocalle_alumno,mail_alumno FROM alumno INNER JOIN carrera ON(carrera.id_carrera = alumno.carrera_alumno) INNER JOIN nivel_carrera ON(carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera) WHERE carrera_alumno = id_carrera AND 
-		   UPPER(nombre_alumno)        LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(apellido_alumno)	   LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(nombre_carrera)	   LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(nombre_nivel_carrera) LIKE UPPER('{$_REQUEST['palabra']}')
-		or UPPER(numerodni_alumno)	   LIKE UPPER('%{$_REQUEST['palabra']}%') ORDER BY id_nivel_carrera,id_carrera,apellido_alumno,nombre_alumno,id_alumno ASC");
-		}else{
-		$sqlBuscar = pg_query("SELECT id_alumno,nombre_alumno,apellido_alumno, numerodni_alumno,nombre_nivel_carrera,carrera.nombre_carrera,id_nivel_carrera,provincia_viviendo_alumno,localidad_viviendo_alumno,calle_alumno,numerocalle_alumno,mail_alumno FROM alumno INNER JOIN carrera ON(carrera.id_carrera = alumno.carrera_alumno) INNER JOIN nivel_carrera ON(carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera) WHERE carrera_alumno = id_carrera AND 
-		   UPPER(nombre_alumno)        LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(apellido_alumno)	   LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(nombre_carrera)	   LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(nombre_nivel_carrera) LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(numerodni_alumno)	   LIKE UPPER('%{$_REQUEST['palabra']}%') ORDER BY id_nivel_carrera,id_carrera,apellido_alumno,nombre_alumno,id_alumno ASC");
-		}
-}else{
-	$sqlBuscar = pg_query("SELECT id_alumno,nombre_alumno,apellido_alumno,carrera.nombre_carrera,numerodni_alumno,nombre_nivel_carrera,provincia_viviendo_alumno,localidad_viviendo_alumno,calle_alumno,numerocalle_alumno,mail_alumno FROM alumno INNER JOIN carrera on(carrera.id_carrera = alumno.carrera_alumno) INNER JOIN nivel_carrera ON(carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera) WHERE carrera_alumno = id_carrera  ORDER BY id_nivel_carrera,id_carrera,apellido_alumno,nombre_alumno,id_alumno ASC");
-}
+//$sqlBuscar = pg_query("SELECT id_alumno,nombre_alumno,apellido_alumno,carrera.nombre_carrera,numerodni_alumno,nombre_nivel_carrera,provincia.nombre as provincia_viviendo_alumno,localidad.nombre as localidad_viviendo_alumno,calle_alumno,numerocalle_alumno,mail_alumno FROM alumno INNER JOIN carrera on(carrera.id_carrera = alumno.carrera_alumno) INNER JOIN nivel_carrera ON(carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera) WHERE carrera_alumno = id_carrera  ORDER BY id_nivel_carrera,id_carrera,apellido_alumno,nombre_alumno,id_alumno ASC");
+$sql = "SELECT id_alumno,nombre_alumno,apellido_alumno,carrera.nombre_carrera,nivel_carrera.nombre_nivel_carrera,numerodni_alumno,provincia.nombre as provincia_viviendo_alumno,localidad.nombre as localidad_viviendo_alumno,calle_alumno,numerocalle_alumno,mail_alumno FROM alumno INNER JOIN carrera ON carrera.id_carrera = alumno.carrera_alumno INNER JOIN nivel_carrera ON carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera INNER JOIN localidad ON localidad.id = alumno.localidad_viviendo_alumno INNER JOIN provincia ON provincia.id = localidad.fk_provincia ";
+$orden = " ORDER BY id_nivel_carrera,id_carrera,apellido_alumno,nombre_alumno,id_alumno ASC;";
+
+$sqlBuscar = pg_query($sql.$orden);
 echo '<table align="center" cellspacing="1" cellpadding="4" border="1" bgcolor=#585858 id="tabla">';
 	echo '<tr bgcolor="#FFFFFF">';
 		echo '<td id="titulo3" colspan="8" align="center"><l1>Listado de Graduados</l1></td>';

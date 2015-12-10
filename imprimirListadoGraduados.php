@@ -22,28 +22,15 @@ header("content-disposition: attachment;filename=DatosFleteros.xls");
 	l3 {font-family: Cambria;color: #424242; padding: .12em;}
 </style>
 </head>
-<body link="#000000" vlink="#000000" alink="#FFFFFF" onload=print()>
+<body link="#000000" vlink="#000000" alink="#FFFFFF" onload="print()">
 <?php
-include_once 'conexion.php';
-$control = $_REQUEST['control'];
-if($control == 1){
-	$palabra = $_REQUEST['palabra'];
-	if ($palabra == "grado" || $palabra == "Grado"){
-		$sqlBuscar = pg_query("SELECT id_alumno,nombre_alumno,apellido_alumno,foto_alumno, numerodni_alumno,nombre_nivel_carrera,carrera.nombre_carrera,id_nivel_carrera,provincia_viviendo_alumno,localidad_viviendo_alumno,calle_alumno,numerocalle_alumno,mail_alumno FROM alumno INNER JOIN carrera ON(carrera.id_carrera = alumno.carrera_alumno) INNER JOIN nivel_carrera ON(carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera) WHERE   UPPER(nombre_alumno)        LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(apellido_alumno)	   LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(nombre_carrera)	   LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(nombre_nivel_carrera) LIKE UPPER('{$_REQUEST['palabra']}')
-		or UPPER(numerodni_alumno)	   LIKE UPPER('%{$_REQUEST['palabra']}%') ORDER BY id_nivel_carrera,id_carrera,apellido_alumno,nombre_alumno,id_alumno ASC");
-		}else{
-		$sqlBuscar = pg_query("SELECT id_alumno,nombre_alumno,apellido_alumno,foto_alumno, numerodni_alumno,nombre_nivel_carrera,carrera.nombre_carrera,id_nivel_carrera,provincia_viviendo_alumno,localidad_viviendo_alumno,calle_alumno,numerocalle_alumno,mail_alumno FROM alumno INNER JOIN carrera ON(carrera.id_carrera = alumno.carrera_alumno) INNER JOIN nivel_carrera ON(carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera) WHERE		   UPPER(nombre_alumno)        LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(apellido_alumno)	   LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(nombre_carrera)	   LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(nombre_nivel_carrera) LIKE UPPER('%{$_REQUEST['palabra']}%')
-		or UPPER(numerodni_alumno)	   LIKE UPPER('%{$_REQUEST['palabra']}%') ORDER BY id_nivel_carrera,id_carrera,apellido_alumno,nombre_alumno,id_alumno ASC");
-		}
-}else{
-	$sqlBuscar = pg_query("SELECT id_alumno,nombre_alumno,apellido_alumno,foto_alumno, numerodni_alumno,carrera.nombre_carrera,nombre_nivel_carrera,provincia_viviendo_alumno,localidad_viviendo_alumno,calle_alumno,numerocalle_alumno,mail_alumno FROM alumno INNER JOIN carrera ON(carrera.id_carrera = alumno.carrera_alumno) INNER JOIN nivel_carrera ON(carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera) ORDER BY id_nivel_carrera,id_carrera,apellido_alumno,nombre_alumno,id_alumno ASC");
-}
+include_once "conexion.php";
+
+//$sqlBuscar = pg_query("SELECT id_alumno,nombre_alumno,apellido_alumno,foto_alumno, numerodni_alumno,carrera.nombre_carrera,nombre_nivel_carrera,provincia_viviendo_alumno,localidad_viviendo_alumno,calle_alumno,numerocalle_alumno,mail_alumno FROM alumno INNER JOIN carrera ON(carrera.id_carrera = alumno.carrera_alumno) INNER JOIN nivel_carrera ON(carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera) ORDER BY id_nivel_carrera,id_carrera,apellido_alumno,nombre_alumno,id_alumno ASC");
+$sql = "SELECT id_alumno,nombre_alumno,apellido_alumno,foto_alumno,carrera.nombre_carrera,nivel_carrera.nombre_nivel_carrera,numerodni_alumno,mail_alumno,mail_alumno2 FROM alumno INNER JOIN carrera ON carrera.id_carrera = alumno.carrera_alumno INNER JOIN nivel_carrera ON carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera ";
+$orden = " ORDER BY id_nivel_carrera,id_carrera,apellido_alumno,nombre_alumno,id_alumno ASC;";
+
+$sqlBuscar = pg_query($sql.$orden);
 $contador = 0;
 echo '<table align="center" cellspacing="1" cellpadding="4" border="1" bgcolor=#585858 id="tabla">';
 	echo '<tr bgcolor="#FFFFFF">';
@@ -58,10 +45,12 @@ echo '<table align="center" cellspacing="1" cellpadding="4" border="1" bgcolor=#
 		echo '<td align="center"><label>Mail</label></td>';
 		echo '<td align="center"><label>Telefono</label></td>';
 	echo '</tr>';
+
 while($row=pg_fetch_array($sqlBuscar,NULL,PGSQL_ASSOC)){
 	$mail_alumno1 = $row['mail_alumno'];
 	$mail_alumno2 = $row['mail_alumno2'];
 	$contador = $contador + 1;
+
 	echo '<tr>';
 		echo '<td align="center"><l2>'.$contador.'</l2></td>';
 		if ($row['foto_alumno'] != ''){
