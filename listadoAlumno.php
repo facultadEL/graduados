@@ -15,7 +15,9 @@
 				listaGraduados = {};
 				var parametros = {
 		            "cbo_grado" : $('#cbo_grado').val(),
-		            "cbo_carrera" : $('#cbo_carrera').val()
+		            "cbo_carrera" : $('#cbo_carrera').val(),
+		            "cbo_docente" : $('#cbo_docente').val()
+
 		    	};
 
 				$.ajax({
@@ -71,12 +73,24 @@
 					$.each(listaGraduados, function(key,value){
 						var vCampos = value.toLowerCase().split(separador);
 						contar++;
-						if (vCampos[1] == '') {
-							foto = '<i class="fa fa-user fa-2x user"></i>';
+						if (vCampos[1] == '' || vCampos[1] == 'fotos/') {
+							if (vCampos[8] != 'f') {
+								foto = '<i class="fa fa-user fa-2x user2"></i>';
+							}else{
+								foto = '<i class="fa fa-user fa-2x user"></i>';
+							}
 						}else{
 							foto = '<img src="'+vCampos[1]+'" width="50" height="50">';
 						}
-						graduadosToAdd += '<tr><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'"><i class="fa fa-eye fa-2x"></i></a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'"><i class="fa fa-refresh fa-2x"></i></a></td></tr>';
+						if (vCampos[8] != 'f') {
+							ojo = '<i class="fa fa-eye fa-2x ojo"></i>';
+							actualizar = '<i class="fa fa-refresh fa-2x actualizar"></i>';
+							graduadosToAdd += '<tr class="docente"><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+ojo+'</a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'">'+actualizar+'</a></td></tr>';
+						}else{
+							ojo = '<i class="fa fa-eye fa-2x"></i>';
+							actualizar = '<i class="fa fa-refresh fa-2x"></i>';
+							graduadosToAdd += '<tr><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+ojo+'</a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'">'+actualizar+'</a></td></tr>';
+						}
 					});
 				}else{
 					palabraABuscar = ($('#palabra').val()).toLowerCase();
@@ -92,13 +106,24 @@
 									//graduadoEncontrado = true;
 
 									contar++;
-									if (vCampos[1] == '') {
-										foto = '<i class="fa fa-user fa-2x user"></i>';
+									if (vCampos[1] == '' || vCampos[1] == 'fotos/') {
+										if (vCampos[8] != 'f') {
+											foto = '<i class="fa fa-user fa-2x user2"></i>';
+										}else{
+											foto = '<i class="fa fa-user fa-2x user"></i>';
+										}
 									}else{
 										foto = '<img src="'+vCampos[1]+'" width="50" height="50">';
 									}
-									graduadosToAdd += '<tr><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'"><i class="fa fa-eye fa-2x"></i></a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'"><i class="fa fa-refresh fa-2x"></i></a></td></tr>';
-
+									if (vCampos[8] != 'f') {
+										ojo = '<i class="fa fa-eye fa-2x ojo"></i>';
+										actualizar = '<i class="fa fa-refresh fa-2x actualizar"></i>';
+										graduadosToAdd += '<tr class="docente"><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+ojo+'</a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'">'+actualizar+'</a></td></tr>';
+									}else{
+										ojo = '<i class="fa fa-eye fa-2x"></i>';
+										actualizar = '<i class="fa fa-refresh fa-2x"></i>';
+										graduadosToAdd += '<tr><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+ojo+'</i></a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'">'+actualizar+'</a></td></tr>';
+									}
 									break;
 								}
 							}
@@ -162,6 +187,17 @@
 				</h3>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col-xs-10 col-sm-10 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-2 col-lg-offset-2">
+				<h3 class="text-center">
+					<select name="cbo_docente" class="form-control" id="cbo_docente" onchange="filtraData();" title="Filtrar por cargo" >
+						<option value="0">Filtrar por cargo...</option>
+						<option value="1">Alumno</option>
+						<option value="2">Docente</option>
+					</select>
+				</h3>
+			</div>
+		</div>
 		<!-- <form class="form-horizontal" id="busqueda" name="buscador" action="busqueda.php" method="post"> -->
 		<div class="row separar_search">
 			<div class="col-xs-10 col-sm-10 col-md-8 col-lg-8 col-xs-offset-1 col-sm-offset-1 col-md-offset-2 col-lg-offset-2">
@@ -184,10 +220,15 @@
 				<input type="button" class="btn btn_separar btn-default" value="Excel" />
 			</a>
 		</div>
+
+		<div class="text-left">
+			<h4 class="cartel_docente"><i class="fa fa-square fa-lg"></i>Docente</h4>						
+		</div>
+
 		<?php
 		
 		$contador = 0;
-		$val = traerSql('id_alumno,nombre_alumno,apellido_alumno,foto_alumno,carrera.nombre_carrera,nombre_nivel_carrera','alumno INNER JOIN carrera ON carrera.id_carrera = alumno.carrera_alumno INNER JOIN nivel_carrera ON carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera ORDER BY id_nivel_carrera,id_carrera,apellido_alumno,nombre_alumno,id_alumno ASC','');
+		//$val = traerSql('id_alumno,nombre_alumno,apellido_alumno,foto_alumno,carrera.nombre_carrera,nombre_nivel_carrera,gra_docente','alumno INNER JOIN carrera ON carrera.id_carrera = alumno.carrera_alumno INNER JOIN nivel_carrera ON carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera ORDER BY id_nivel_carrera,id_carrera,apellido_alumno,nombre_alumno,id_alumno ASC','');
 		echo '<div class="table-responsive">';
 			echo '<table class="table table-striped table-condensed table-responsive table-bordered table-hover">';
 			//echo '<table class="text-center" cellspacing="1" cellpadding="4" border="1" bgcolor=#585858 id="tabla">';

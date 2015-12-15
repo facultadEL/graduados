@@ -266,6 +266,18 @@
 				$('#a_foto').attr('hidden', true);
 			}
 
+			function verif_docente(){
+				if($('#docente_si').is(':checked')){
+					$('#gra_especialidad').attr('disabled', false);
+					$('#especialidad').attr('hidden', false);
+					$('.gra_especialidad').attr('hidden', false);
+				}else{
+					$('#gra_especialidad').attr('disabled', true);
+					$('#especialidad').attr('hidden', true);
+					$('.gra_especialidad').attr('hidden', true);
+				}
+			}
+
 			//archivo
 			function validarArchivo(){
 				nombreArchivoValidar = $('#gra_foto').val();
@@ -285,6 +297,7 @@
 			$(document).ready(function() {
 				ocultar_alertar();
 				mostrarDatos();
+				verif_docente();
 			});
 
 		</script>
@@ -341,6 +354,8 @@ if ($id_Alumno != 0) {
 			$gra_twitter = $rowAlumno['twitter_alumno'];
 			$gra_peraca = $rowAlumno['perfilacademico_alumno'];
 			$gra_perlab = $rowAlumno['perfil_laboral_alumno'];
+			$gra_docente = $rowAlumno['gra_docente'];
+			$gra_especialidad = $rowAlumno['gra_especialidad'];
 			//$destinoImagen = $rowAlumno['foto_alumno'];
 			//$ancho_final = $rowAlumno['ancho_final'];
 			//$alto_final = $rowAlumno['alto_final'];
@@ -398,13 +413,13 @@ if ($id_Alumno != 0) {
 				</div>
 
 			<div class=" col-xs-4 col-sm-4 col-md-4 col-lg-4 text-right">
-					<h4 class="pregrado"><i class="fa fa-square fa-lg"></i>Pregrado</h4>						
+				<h4 class="pregrado"><i class="fa fa-square fa-lg"></i>Pregrado</h4>						
 			</div>
 			<div class=" col-xs-4 col-sm-4 col-md-4 col-lg-4 text-center">
-					<h4 class="grado"><i class="fa fa-square fa-lg"></i>Grado</h4>
+				<h4 class="grado"><i class="fa fa-square fa-lg"></i>Grado</h4>
 			</div>
 			<div class=" col-xs-4 col-sm-4 col-md-4 col-lg-4 text-left">
-					<h4 class="posgrado"><i class="fa fa-square fa-lg"></i>Posgrado</h4>
+				<h4 class="posgrado"><i class="fa fa-square fa-lg"></i>Posgrado</h4>
 			</div>
 
 			
@@ -614,6 +629,48 @@ if ($id_Alumno != 0) {
 					<label for="gra_twitter" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Twitter:</label>
 					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 						<input class="form-control input-sm" name="gra_twitter" id="gra_twitter" type="text" value="<?php echo $gra_twitter; ?>" maxlength="20" title="Ingrese el twitter del graduado"/>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="docente" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Docente:</label>
+					<?php
+						if ($id_Alumno != 0) {
+							if ($gra_docente == 't') {
+								echo '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">';
+									echo '<label for="docente" class="radio-inline">';
+										echo '<input name="gra_docente" type="radio" id="docente_si" onClick="verif_docente()" class="gra_docente1" value="1" checked/>S&iacute;';
+									echo '</label>';
+									echo '<label for="docente" class="radio-inline">';
+										echo '<input name="gra_docente" type="radio" id="docente_no" onClick="verif_docente()" class="gra_docente0" value="0"/>No';
+									echo '</label>';
+								echo '</div>';
+							}else{
+								echo '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">';
+									echo '<label for="docente" class="radio-inline">';
+										echo '<input name="gra_docente" type="radio" id="docente_si" onClick="verif_docente()" class="gra_docente1" value="1"/>S&iacute;';
+									echo '</label>';
+									echo '<label for="docente" class="radio-inline">';
+										echo '<input name="gra_docente" type="radio" id="docente_no"  onClick="verif_docente()" class="gra_docente0" value="0" checked/>No';
+									echo '</label>';
+								echo '</div>';
+							}
+						}else{
+							echo '<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">';
+								echo '<label for="docente" class="radio-inline">';
+									echo '<input name="gra_docente" type="radio" id="docente_si" onClick="verif_docente()" class="gra_docente1" value="1"/>S&iacute;';
+								echo '</label>';
+								echo '<label for="docente" class="radio-inline">';
+									echo '<input name="gra_docente" type="radio" id="docente_no" onClick="verif_docente()" class="gra_docente0" value="0" checked/>No';
+								echo '</label>';
+							echo '</div>';
+						}
+
+					?>
+
+					<label for="gra_especialidad" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left gra_especialidad">Especialidad:</label>
+					<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4" id="especialidad">
+						<input class="form-control input-sm" name="gra_especialidad" id="gra_especialidad" type="text" value="<?php echo $gra_especialidad; ?>" maxlength="40" title="Ingrese la especialidad en la que trabaja el graduado"/>
 					</div>
 				</div>
 

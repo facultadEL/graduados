@@ -63,7 +63,9 @@ CREATE TABLE alumno (
     localidad_trabajo_alumno integer references localidad(id),
     localidad_viviendo_alumno integer references localidad(id),
     perfilacademico_alumno text,
-    perfil_laboral_alumno text
+    perfil_laboral_alumno text,
+    gra_docente boolean default false,
+    gra_especialidad character varying (40)
 );
 
 CREATE TABLE grupo_alumnos (

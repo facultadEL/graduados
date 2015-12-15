@@ -99,6 +99,8 @@ $gra_depto = trim($_REQUEST['gra_depto']);
 $gra_piso = trim($_REQUEST['gra_piso']);
 $gra_mail1 = trim($_REQUEST['gra_mail1']);
 $gra_mail2 = trim($_REQUEST['gra_mail2']);
+$gra_docente = ($_REQUEST['gra_docente'] == 0) ? 'FALSE' : 'TRUE';
+$gra_especialidad = trim(ucfirst($_REQUEST['gra_especialidad']));
 $gra_facebook = trim(ucwords($_REQUEST['gra_facebook']));
 $gra_twitter = trim($_REQUEST['gra_twitter']);
 $gra_peraca = trim(ucfirst($_REQUEST['gra_peraca']));
@@ -197,7 +199,7 @@ if ($id_Alumno == 0){
 
 	$id_Alumno = traerId('id_alumno','alumno');
 	//NUEVO GRADUADO
-	$consultas= "INSERT INTO alumno(id_alumno,nombre_alumno,apellido_alumno,mail_alumno,facebook_alumno,numerodni_alumno,tipodni_alumno,calle_alumno,perfilacademico_alumno,foto_alumno,carrera_alumno,ancho_final,alto_final,fechanacimiento_alumno,numerocalle_alumno,mail_alumno2,twitter_alumno,localidad_nac_alumno,localidad_trabajo_alumno,localidad_viviendo_alumno,perfil_laboral_alumno,gra_depto,gra_piso)VALUES('$id_Alumno','$gra_nombre','$gra_apellido','$gra_mail1','$gra_facebook','$gra_nrodoc',$gra_tipodoc,'$gra_calle','$gra_peraca','$destino_bd',$gra_carrera,'$ancho_final','$alto_final','$gra_fecnac','$gra_nrocalle','$gra_mail2','$gra_twitter',$gra_locnac,$gra_loctrab,$gra_locvive,'$gra_perlab','$gra_depto','$gra_piso');";
+	$consultas= "INSERT INTO alumno(id_alumno,nombre_alumno,apellido_alumno,mail_alumno,facebook_alumno,numerodni_alumno,tipodni_alumno,calle_alumno,perfilacademico_alumno,foto_alumno,carrera_alumno,ancho_final,alto_final,fechanacimiento_alumno,numerocalle_alumno,mail_alumno2,twitter_alumno,localidad_nac_alumno,localidad_trabajo_alumno,localidad_viviendo_alumno,perfil_laboral_alumno,gra_depto,gra_piso,gra_docente,gra_especialidad)VALUES('$id_Alumno','$gra_nombre','$gra_apellido','$gra_mail1','$gra_facebook','$gra_nrodoc',$gra_tipodoc,'$gra_calle','$gra_peraca','$destino_bd',$gra_carrera,'$ancho_final','$alto_final','$gra_fecnac','$gra_nrocalle','$gra_mail2','$gra_twitter',$gra_locnac,$gra_loctrab,$gra_locvive,'$gra_perlab','$gra_depto','$gra_piso','$gra_docente','$gra_especialidad');";
 	//ASIGNO AL GRADUADO A UN GRUPO
 	$consultas .= "INSERT INTO alumnos_por_grupo(grupo_fk, alumno_fk)VALUES('$gra_grupo','$id_Alumno');";
 
@@ -219,7 +221,7 @@ if ($id_Alumno == 0){
 	//$tiene_foto = contarRegistro('*','alumno','foto_alumno <> '' AND id_alumno = '.$id_Alumno); //$tiene_foto > 0, si tiene foto de antes.
 	//echo 'nombreFoto: '.$nombreFoto;
 	if(empty($nombreFoto)){
-		$consultas = "UPDATE alumno SET nombre_alumno = '$gra_nombre',apellido_alumno = '$gra_apellido',mail_alumno = '$gra_mail1',facebook_alumno = '$gra_facebook',numerodni_alumno = '$gra_nrodoc',tipodni_alumno = $gra_tipodoc,calle_alumno = '$gra_calle',perfilacademico_alumno = '$gra_peraca',carrera_alumno = $gra_carrera,fechanacimiento_alumno = '$gra_fecnac',numerocalle_alumno = '$gra_nrocalle',mail_alumno2 = '$gra_mail2',twitter_alumno = '$gra_twitter',localidad_nac_alumno = $gra_locnac,localidad_trabajo_alumno = $gra_loctrab,localidad_viviendo_alumno = $gra_locvive,perfil_laboral_alumno = '$gra_perlab',gra_depto = '$gra_depto',gra_piso = '$gra_piso' WHERE id_alumno = $id_Alumno;";
+		$consultas = "UPDATE alumno SET nombre_alumno = '$gra_nombre',apellido_alumno = '$gra_apellido',mail_alumno = '$gra_mail1',facebook_alumno = '$gra_facebook',numerodni_alumno = '$gra_nrodoc',tipodni_alumno = $gra_tipodoc,calle_alumno = '$gra_calle',perfilacademico_alumno = '$gra_peraca',carrera_alumno = $gra_carrera,fechanacimiento_alumno = '$gra_fecnac',numerocalle_alumno = '$gra_nrocalle',mail_alumno2 = '$gra_mail2',twitter_alumno = '$gra_twitter',localidad_nac_alumno = $gra_locnac,localidad_trabajo_alumno = $gra_loctrab,localidad_viviendo_alumno = $gra_locvive,perfil_laboral_alumno = '$gra_perlab',gra_depto = '$gra_depto',gra_piso = '$gra_piso', gra_docente = '$gra_docente', gra_especialidad = '$gra_especialidad' WHERE id_alumno = $id_Alumno;";
 	}else{
 		//LE QUITO LOS ESPACIOS AL NOMBRE DEL ARCHIVO
 		$nombre_foto = str_replace(" ", "-", $nombreFoto);
@@ -302,7 +304,7 @@ if ($id_Alumno == 0){
 			//guardo la nueva foto (nuevaFoto, destino, calidad)
 			imagepng( $imagen_final, $destino_bd, 9 );
 		}
-		$consultas = "UPDATE alumno SET nombre_alumno = '$gra_nombre',apellido_alumno = '$gra_apellido',mail_alumno = '$gra_mail1',facebook_alumno = '$gra_facebook',numerodni_alumno = '$gra_nrodoc',tipodni_alumno = $gra_tipodoc,calle_alumno = '$gra_calle',perfilacademico_alumno = '$gra_peraca',foto_alumno = '$destino_bd',carrera_alumno = $gra_carrera,ancho_final = '$ancho_final',alto_final = '$alto_final',fechanacimiento_alumno = '$gra_fecnac',numerocalle_alumno = '$gra_nrocalle',mail_alumno2 = '$gra_mail2',twitter_alumno = '$gra_twitter',localidad_nac_alumno = $gra_locnac,localidad_trabajo_alumno = $gra_loctrab,localidad_viviendo_alumno = $gra_locvive,perfil_laboral_alumno = '$gra_perlab',gra_depto = '$gra_depto',gra_piso = '$gra_piso' WHERE id_alumno = $id_Alumno;";
+		$consultas = "UPDATE alumno SET nombre_alumno = '$gra_nombre',apellido_alumno = '$gra_apellido',mail_alumno = '$gra_mail1',facebook_alumno = '$gra_facebook',numerodni_alumno = '$gra_nrodoc',tipodni_alumno = $gra_tipodoc,calle_alumno = '$gra_calle',perfilacademico_alumno = '$gra_peraca',foto_alumno = '$destino_bd',carrera_alumno = $gra_carrera,ancho_final = '$ancho_final',alto_final = '$alto_final',fechanacimiento_alumno = '$gra_fecnac',numerocalle_alumno = '$gra_nrocalle',mail_alumno2 = '$gra_mail2',twitter_alumno = '$gra_twitter',localidad_nac_alumno = $gra_locnac,localidad_trabajo_alumno = $gra_loctrab,localidad_viviendo_alumno = $gra_locvive,perfil_laboral_alumno = '$gra_perlab',gra_depto = '$gra_depto',gra_piso = '$gra_piso', gra_docente = '$gra_docente', gra_especialidad = '$gra_especialidad' WHERE id_alumno = $id_Alumno;";
 	}
 	//echo $consultas.$sqlGuardar;
 	$error = guardarSql($consultas.$sqlGuardar);

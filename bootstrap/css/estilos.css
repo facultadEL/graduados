@@ -100,6 +100,21 @@ legend {
 	margin-top: 20px !important;
 }
 
+.docente{
+    background: #286090 !important;
+    color: #fff !important;
+}
+.ojo, .actualizar{
+	color: #fff !important;
+}
+.user2{
+	color: #fff !important; /* color de los botones de la noticia */
+}
+
+.cartel_docente{
+    color: #286090 !important;
+}
+
 /* ---------------------------------------------------------------------------------------
     Botón Cancelar.
 ------------------------------------------------------------------------------------------*/
