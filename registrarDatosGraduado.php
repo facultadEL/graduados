@@ -77,9 +77,6 @@ if(count($vDatos) > 1){
 	// }
 }
 
-//----------------------------------------------------------------------------------------------------------------------
-
-
 $gra_nombre = trim(ucwords($_REQUEST['gra_nombre']));
 $gra_apellido = trim(ucwords($_REQUEST['gra_apellido']));
 $gra_tipodoc = trim($_REQUEST['gra_tipodoc']);
@@ -202,15 +199,6 @@ if ($id_Alumno == 0){
 
 	//$consultas .= "INSERT INTO telefonos_del_alumno(grupo_fk, alumno_fk)VALUES('$gra_grupo','$id_Alumno');";
 
-	$error = guardarSql($consultas.$sqlGuardar);
-
-	include_once "cerrar_conn.php";
-	if ($error == 1){
-		echo '<script language="JavaScript"> window.location="registrarGraduado.php";   alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador"); </script>';
-	}else{
-		echo '<script language="JavaScript">  window.location="listadoAlumno.php";	alert("Los datos se guardaron correctamente"); </script>';
-	}
-
 }elseif ($id_Alumno != 0) {
 
 	//UPDATE
@@ -303,15 +291,15 @@ if ($id_Alumno == 0){
 		}
 		$consultas = "UPDATE alumno SET nombre_alumno = '$gra_nombre',apellido_alumno = '$gra_apellido',mail_alumno = '$gra_mail1',facebook_alumno = '$gra_facebook',numerodni_alumno = '$gra_nrodoc',tipodni_alumno = $gra_tipodoc,calle_alumno = '$gra_calle',perfilacademico_alumno = '$gra_peraca',foto_alumno = '$destino_bd',carrera_alumno = $gra_carrera,ancho_final = '$ancho_final',alto_final = '$alto_final',fechanacimiento_alumno = '$gra_fecnac',numerocalle_alumno = '$gra_nrocalle',mail_alumno2 = '$gra_mail2',twitter_alumno = '$gra_twitter',localidad_nac_alumno = $gra_locnac,localidad_trabajo_alumno = $gra_loctrab,localidad_viviendo_alumno = $gra_locvive,perfil_laboral_alumno = '$gra_perlab',gra_depto = '$gra_depto',gra_piso = '$gra_piso', gra_docente = '$gra_docente', gra_especialidad = '$gra_especialidad' WHERE id_alumno = $id_Alumno;";
 	}
-	//echo $consultas.$sqlGuardar;
-	$error = guardarSql($consultas.$sqlGuardar);
+}
 
-	include_once "cerrar_conn.php";
-	if ($error == 1){
-		echo '<script language="JavaScript"> window.location="registrarGraduado.php?idAlumno='.$id_Alumno.'";   alert("Los datos no se modificaron correctamente. Pongase en contacto con el administrador"); </script>';
-	}else{
-		echo '<script language="JavaScript">  window.location="listadoAlumno.php";	alert("Los datos se modificaron correctamente"); </script>';
-	}
+$error = guardarSql($consultas.$sqlGuardar);
+
+include_once "cerrar_conn.php";
+if ($error == 1){
+	echo '<script language="JavaScript"> window.location="registrarGraduado.php";   alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador"); </script>';
+}else{
+	echo '<script language="JavaScript">  window.location="listadoAlumno.php";	alert("Los datos se guardaron correctamente"); </script>';
 }
 
 ?>
