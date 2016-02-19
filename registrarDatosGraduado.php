@@ -84,14 +84,11 @@ $gra_nombre = trim(ucwords($_REQUEST['gra_nombre']));
 $gra_apellido = trim(ucwords($_REQUEST['gra_apellido']));
 $gra_tipodoc = trim($_REQUEST['gra_tipodoc']);
 $gra_nrodoc = trim($_REQUEST['gra_nrodoc']);
-$gra_fecnac = trim($_REQUEST['gra_fecnac']);
+$gra_fecnac = empty($_REQUEST['gra_fecnac']) ? '1900-01-01' : trim($_REQUEST['gra_fecnac']);
 $gra_carrera = trim($_REQUEST['gra_carrera']);
 $gra_grupo = trim($_REQUEST['gra_grupo']);
-//$gra_provnac = trim($_REQUEST['gra_provnac']);
 $gra_locnac = (empty($_REQUEST['gra_locnac'])) ? 0 : $_REQUEST['gra_locnac'];
-//$gra_provtrab = trim($_REQUEST['gra_provtrab']);
 $gra_loctrab = (empty($_REQUEST['gra_loctrab'])) ? 0 : $_REQUEST['gra_loctrab'];
-//$gra_provive = trim($_REQUEST['gra_provive']);
 $gra_locvive = (empty($_REQUEST['gra_locvive'])) ? 0 : $_REQUEST['gra_locvive'];
 $gra_calle = trim(ucwords($_REQUEST['gra_calle']));
 $gra_nrocalle = trim($_REQUEST['gra_nrocalle']);
@@ -209,7 +206,7 @@ if ($id_Alumno == 0){
 
 	include_once "cerrar_conn.php";
 	if ($error == 1){
-		//echo '<script language="JavaScript"> window.location="registrarGraduado.php";   alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador"); </script>';
+		echo '<script language="JavaScript"> window.location="registrarGraduado.php";   alert("Los datos no se guardaron correctamente. Pongase en contacto con el administrador"); </script>';
 	}else{
 		echo '<script language="JavaScript">  window.location="listadoAlumno.php";	alert("Los datos se guardaron correctamente"); </script>';
 	}
@@ -311,7 +308,7 @@ if ($id_Alumno == 0){
 
 	include_once "cerrar_conn.php";
 	if ($error == 1){
-		//echo '<script language="JavaScript"> window.location="registrarGraduado.php";   alert("Los datos no se modificaron correctamente. Pongase en contacto con el administrador"); </script>';
+		echo '<script language="JavaScript"> window.location="registrarGraduado.php?idAlumno='.$id_Alumno.'";   alert("Los datos no se modificaron correctamente. Pongase en contacto con el administrador"); </script>';
 	}else{
 		echo '<script language="JavaScript">  window.location="listadoAlumno.php";	alert("Los datos se modificaron correctamente"); </script>';
 	}
