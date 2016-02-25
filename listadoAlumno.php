@@ -71,31 +71,33 @@
 				if(busqueda == false)
 				{	
 					$.each(listaGraduados, function(key,value){
+						var foto = value.split(separador)[1];
 						var vCampos = value.toLowerCase().split(separador);
 						contar++;
-						if (vCampos[1] == '' || vCampos[1] == 'fotos/') {
+						if (foto == '' || foto == 'fotos/') {
 							if (vCampos[8] != 'f') {
 								foto = '<i class="fa fa-user fa-2x user2"></i>';
 							}else{
 								foto = '<i class="fa fa-user fa-2x user"></i>';
 							}
 						}else{
-							foto = '<img src="'+vCampos[1]+'" width="50" height="50">';
+							foto = '<img src="'+foto+'" width="50" height="50">';
 						}
 						if (vCampos[8] != 'f') {
 							ojo = '<i class="fa fa-eye fa-2x ojo"></i>';
 							actualizar = '<i class="fa fa-refresh fa-2x actualizar"></i>';
-							graduadosToAdd += '<tr class="docente"><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+ojo+'</a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'">'+actualizar+'</a></td></tr>';
+							graduadosToAdd += '<tr class="docente"><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center">'+vCampos[7]+'</td><td class="text-center">'+vCampos[9]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+ojo+'</a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'">'+actualizar+'</a></td></tr>';
 						}else{
 							ojo = '<i class="fa fa-eye fa-2x"></i>';
 							actualizar = '<i class="fa fa-refresh fa-2x"></i>';
-							graduadosToAdd += '<tr><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+ojo+'</a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'">'+actualizar+'</a></td></tr>';
+							graduadosToAdd += '<tr><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center">'+vCampos[7]+'</td><td class="text-center">'+vCampos[9]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+ojo+'</a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'">'+actualizar+'</a></td></tr>';
 						}
 					});
 				}else{
 					palabraABuscar = ($('#palabra').val()).toLowerCase();
 					//graduadoEncontrado = false;
 					$.each(listaGraduados, function(key,value){
+						var foto = value.split(separador)[1];
 						var vCampos = value.toLowerCase().split(separador);
 						for(var i = 0; i < vCampos.length; i++)
 						{
@@ -106,23 +108,23 @@
 									//graduadoEncontrado = true;
 
 									contar++;
-									if (vCampos[1] == '' || vCampos[1] == 'fotos/') {
+									if (foto == '' || foto == 'fotos/') {
 										if (vCampos[8] != 'f') {
 											foto = '<i class="fa fa-user fa-2x user2"></i>';
 										}else{
 											foto = '<i class="fa fa-user fa-2x user"></i>';
 										}
 									}else{
-										foto = '<img src="'+vCampos[1]+'" width="50" height="50">';
+										foto = '<img src="'+foto+'" width="50" height="50">';
 									}
 									if (vCampos[8] != 'f') {
 										ojo = '<i class="fa fa-eye fa-2x ojo"></i>';
 										actualizar = '<i class="fa fa-refresh fa-2x actualizar"></i>';
-										graduadosToAdd += '<tr class="docente"><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+ojo+'</a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'">'+actualizar+'</a></td></tr>';
+										graduadosToAdd += '<tr class="docente"><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center">'+vCampos[7]+'</td><td class="text-center">'+vCampos[9]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+ojo+'</a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'">'+actualizar+'</a></td></tr>';
 									}else{
 										ojo = '<i class="fa fa-eye fa-2x"></i>';
 										actualizar = '<i class="fa fa-refresh fa-2x"></i>';
-										graduadosToAdd += '<tr><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+ojo+'</i></a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'">'+actualizar+'</a></td></tr>';
+										graduadosToAdd += '<tr><td class="text-center">'+contar+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+foto+'</a></td><td class="text-center">'+vCampos[2]+', '+vCampos[3]+'</td><td class="text-center">'+vCampos[4]+'</td><td class="text-center">'+vCampos[5]+'</td><td class="text-center">'+vCampos[7]+'</td><td class="text-center">'+vCampos[9]+'</td><td class="text-center"><a href="verAlumno.php?idAlumno='+vCampos[6]+'">'+ojo+'</i></a></td><td class="text-center"><a href="listadoSeguimiento.php?idAlumno='+vCampos[6]+'">'+actualizar+'</a></td></tr>';
 									}
 									break;
 								}
@@ -234,7 +236,7 @@
 			//echo '<table class="text-center" cellspacing="1" cellpadding="4" border="1" bgcolor=#585858 id="tabla">';
 				echo '<thead>';
 					echo '<tr>';
-						echo '<th colspan="7" class="text-center"><h3>Listado de Graduados</h3></th>';
+						echo '<th colspan="9" class="text-center"><h3>Listado de Graduados</h3></th>';
 					echo '</tr>';
 					//echo '<tr>';
 						//echo '<th id="titulo3" colspan="7" class="text-center"><a href="imprimirListadoGraduados.php?control=0"><input type="button" class="btn btn-default" value="Imprimir"/></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="excelListadoGraduados.php?control=0"><input type="button" class="btn btn-default" value="Excel"/></a></th>';
@@ -245,6 +247,8 @@
 						echo '<th class="text-center">Alumno</th>';
 						echo '<th class="text-center">Nivel Carrera</th>';
 						echo '<th class="text-center">Carrera</th>';
+						echo '<th class="text-center">DNI</th>';
+						echo '<th class="text-center">Email</th>';
 						echo '<th class="text-center">Ver Graduado</th>';
 						echo '<th class="text-center">Seguimiento</th>';
 					echo '</tr>';

@@ -11,7 +11,7 @@ $sep = '/--/';
 $sep2 = '/--/--/';
 $sep3 = '/--/--/--/';
 
-$sql = "SELECT id_alumno,nombre_alumno,apellido_alumno,foto_alumno,carrera.nombre_carrera,nivel_carrera.nombre_nivel_carrera,numerodni_alumno,gra_docente FROM alumno INNER JOIN carrera ON carrera.id_carrera = alumno.carrera_alumno INNER JOIN nivel_carrera ON carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera ";
+$sql = "SELECT id_alumno,nombre_alumno,apellido_alumno,foto_alumno,carrera.nombre_carrera,nivel_carrera.nombre_nivel_carrera,numerodni_alumno,gra_docente,mail_alumno FROM alumno INNER JOIN carrera ON carrera.id_carrera = alumno.carrera_alumno INNER JOIN nivel_carrera ON carrera.nivel_carrera_fk = nivel_carrera.id_nivel_carrera ";
 $orden = " ORDER BY id_nivel_carrera,id_carrera,apellido_alumno,nombre_alumno,id_alumno ASC;";
 //111
 if ($cbo_grado != 0 && $cbo_carrera != 0 && $cbo_docente != 0) {
@@ -62,7 +62,7 @@ while($row = pg_fetch_array($sql_final)){
 	$contador = $contador + 1;
 
 	$foto = $row['foto_alumno'];
-	$stringGraduado .= $contador.$sep.$foto.$sep.$row['apellido_alumno'].$sep.$row['nombre_alumno'].$sep.$row['nombre_nivel_carrera'].$sep.$row['nombre_carrera'].$sep.$row['id_alumno'].$sep.$row['numerodni_alumno'].$sep.$row['gra_docente'].$sep2;
+	$stringGraduado .= $contador.$sep.$foto.$sep.$row['apellido_alumno'].$sep.$row['nombre_alumno'].$sep.$row['nombre_nivel_carrera'].$sep.$row['nombre_carrera'].$sep.$row['id_alumno'].$sep.$row['numerodni_alumno'].$sep.$row['gra_docente'].$sep.$row['mail_alumno'].$sep2;
 }
 
 include_once "cerrar_conn.php";
