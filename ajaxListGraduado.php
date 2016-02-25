@@ -62,7 +62,26 @@ while($row = pg_fetch_array($sql_final)){
 	$contador = $contador + 1;
 
 	$foto = $row['foto_alumno'];
-	$stringGraduado .= $contador.$sep.$foto.$sep.$row['apellido_alumno'].$sep.$row['nombre_alumno'].$sep.$row['nombre_nivel_carrera'].$sep.$row['nombre_carrera'].$sep.$row['id_alumno'].$sep.$row['numerodni_alumno'].$sep.$row['gra_docente'].$sep.$row['mail_alumno'].$sep2;
+	$idAlumno = $row['id_alumno'];
+
+	$consultaTelefono = "SELECT caracteristica_alumno,telefono_alumno FROM telefonos_del_alumno WHERE alumno_fk=$idAlumno;";
+	$sqlTelefono = pg_query($consultaTelefono);
+	$count = 0;
+	$stringTelefono = '';
+	while($rowTelefono = pg_fetch_array($sqlTelefono))
+	{
+		if($count != 0)
+		{
+			$stringTelefono .= '<br>';
+		}
+		$count++;
+		$caracTelefono = $rowTelefono['caracteristica_alumno'];
+		$numTelefono = $rowTelefono['telefono_alumno'];
+
+		$stringTelefono .= "$caracTelefono - $numTelefono";
+	}
+
+	$stringGraduado .= $contador.$sep.$foto.$sep.$row['apellido_alumno'].$sep.$row['nombre_alumno'].$sep.$row['nombre_nivel_carrera'].$sep.$row['nombre_carrera'].$sep.$row['id_alumno'].$sep.$row['numerodni_alumno'].$sep.$row['gra_docente'].$sep.$row['mail_alumno'].$sep.$stringTelefono.$sep2;
 }
 
 include_once "cerrar_conn.php";
