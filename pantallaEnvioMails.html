@@ -95,11 +95,12 @@ function enviarMails()
 
 			if(passCorrect)
 			{
-				console.log(`Mando! ${iGlobal}`);
 				var n,a,m;
 				n = graduadosJSON[iGlobal].nombre;
 				a = graduadosJSON[iGlobal].apellido;
 				m = graduadosJSON[iGlobal].mail;
+
+				console.log(`Mando! ${n} ${a} ${m}`);
 
 				var param = {
 					"mail":m,
@@ -232,8 +233,10 @@ function sleep(milliseconds) {
 function updatePercent(actual,max)
 {
 	var percent = parseInt(actual * 100 / max);
-	$('#progressBar').css('width',percent);
+	$('#progressBar').css('width',percent+'%');
 	$('#progressBar').html(`${percent}%`)
+	$('#progressBar').attr('aria-valuenow',percent);
+
 }
 
 function createHtmlOptions(cursos)
