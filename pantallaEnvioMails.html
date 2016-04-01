@@ -1,0 +1,427 @@
+<html>
+<head>
+<title>Registrar Interesado</title>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="bootstrap/css/estilos.css">
+<script src="bootstrap/js/jquery.min.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script>
+
+var graduadosJSON;
+var carrerasIn = false;
+
+function controlVacio(nombreSelector)
+{
+	if($.trim($(nombreSelector).val()) == '')
+	{
+		$('#alertaDatos').attr('hidden',false);
+		$(nombreSelector).css('box-shadow','0px 0px 10px 5px #f24d4d');
+		$(nombreSelector).focus();
+		return false;
+	}
+	return true;
+}
+
+function controlSubmit()
+{
+	$('#alertaPass').attr('hidden', true);
+
+	if(!controlVacio('#titulo')) return false;
+	if(!controlVacio('#contenido')) return false;
+	if($('#carreraSelect').val() == 0)
+	{
+		$('#alertaCarrera').attr('hidden', false);
+		return false;
+	}
+
+	enviarMails();
+
+	return false;
+}
+
+function enviarMails()
+{
+	var valueActual = 0;
+	var max = graduadosJSON.length;
+	$('#progressDiv').show();
+	updatePercent(valueActual,max);
+
+	var title = $('#titulo').val();
+	var content = $('#contenido').val();
+
+	var countTimeout = 0;
+	var countPass = 0;
+	var passCorrect = true;
+
+	var iGlobal = -1;
+
+	var interval = setInterval(function(){sendMail();}, 5000);
+
+	function sendMail()
+	{
+
+		for(var i = 0; i < 5; i++)
+		{
+			if(iGlobal == max - 1)
+			{
+				break;
+			}
+			iGlobal++;
+			if(iGlobal == 0 || iGlobal % 100 == 0)
+			{
+				for(var j = 0; j < 3; j++)
+				{
+					
+					var prompText = `Ingrese la contraseña (Intento ${(j+1)})`;
+					var answer = prompt(prompText,'');
+					if(answer != "eze")
+					{
+						passCorrect = false;
+					}
+					else
+					{
+						passCorrect = true;
+						j = 3;
+					}
+				
+				}
+			}
+			else
+			{
+				passCorrect = true;
+			}
+
+			if(passCorrect)
+			{
+				console.log(`Mando! ${iGlobal}`);
+				var n,a,m;
+				n = graduadosJSON[iGlobal].nombre;
+				a = graduadosJSON[iGlobal].apellido;
+				m = graduadosJSON[iGlobal].mail;
+
+				var param = {
+					"mail":m,
+					"title":title,
+					"content":content
+				};
+
+				$.ajax({
+					type:'POST',
+					data:param,
+					url:'sendMailGraduado.php',
+					success: function(response)
+					{
+						if(response == "1")
+						{
+							valueActual++;
+							updatePercent(valueActual,max);
+						}
+						else
+						{
+							alert("No se pudo enviar el mail.");
+						}
+					},
+					error: function(msg)
+					{
+						alert("Hubo un error al enviar mails. Contactarse con el administrador");
+					}
+				});
+			}
+			else
+			{
+				$('#alertaPass').attr('hidden', false);
+				break;
+			}
+
+		}
+
+		if(iGlobal == max - 1)
+		{
+			clearInterval(interval);
+		}
+	}
+	/*
+	for(var i = 0; i < max; i++)
+	{
+		if(i == 0 || i % 100 == 0)
+		{
+			for(var j = 0; j < 3; j++)
+			{
+				
+				var prompText = `Ingrese la contraseña (Intento ${(j+1)})`;
+				var answer = prompt(prompText,'');
+				if(answer != "eze")
+				{
+					passCorrect = false;
+				}
+				else
+				{
+					passCorrect = true;
+					j = 3;
+				}
+			
+			}
+		}
+		else
+		{
+			passCorrect = true;
+		}
+
+		if(passCorrect)
+		{
+			console.log(`Mando! ${i}`);
+			var n,a,m;
+			n = graduadosJSON[i].nombre;
+			a = graduadosJSON[i].apellido;
+			m = graduadosJSON[i].mail;
+
+			var param = {
+				"mail":m,
+				"title":title,
+				"content":content
+			};
+
+			$.ajax({
+				type:'POST',
+				data:param,
+				url:'sendMailGraduado.php',
+				success: function(response)
+				{
+					if(response == "1")
+					{
+						valueActual++;
+						updatePercent(valueActual,max);
+					}
+					else
+					{
+						alert("No se pudo enviar el mail.");
+					}
+				},
+				error: function(msg)
+				{
+					alert("Hubo un error al enviar mails. Contactarse con el administrador");
+				}
+			});
+		}
+		else
+		{
+			$('#alertaPass').attr('hidden', false);
+			break;
+		}
+
+		if(i > 0 && (i % 5 == 0))
+		{
+			sleep(5000)
+		}
+
+	}
+	*/
+}
+
+function sleep(milliseconds) {
+	var start = new Date().getTime();
+	for (var i = 0; i < 1e7; i++) {
+		if ((new Date().getTime() - start) > milliseconds){
+			break;
+		}
+	}
+}
+
+function updatePercent(actual,max)
+{
+	var percent = parseInt(actual * 100 / max);
+	$('#progressBar').css('width',percent);
+	$('#progressBar').html(`${percent}%`)
+}
+
+function createHtmlOptions(cursos)
+{
+	htmlOptions += '<option value="0">Seleccione un Curso</option>';
+	for(var i = 0; i < cursos.length; i++)
+	{
+		htmlOptions += `<option value="${cursos[i].id}">${cursos[i].nombre}</option>`;
+	}
+	addCurso();
+}
+
+function cargarCarreras()
+{
+	
+	$.ajax({
+		type: 'POST',
+		url: 'getCarreras.php',
+		success: function(response)
+		{
+			var r = JSON.parse(response);
+			carrerasIn = true;
+			successGetCarreras(r);
+		},
+		error: function(msg)
+		{
+			alert('Contactese con el administrador. Error: '+msg);
+		}
+	});
+}
+
+function successGetCarreras(c)
+{
+	var htmlCarreras = `<div class="row"><div class="form-group"><label for="carreraSelect" class="control-label col-xs-3 col-sm-2 col-md-2 col-lg-2">Carrera:</label>`;
+	htmlCarreras += `<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10"><select class="form-control" name="carreraSelect" id="carreraSelect" onchange="buscarGraduados()">`;
+	var l = c.length;
+	htmlCarreras += '<option value="0">Seleccione una carrera</option>';
+	for(var i = 0; i < l; i++)
+	{
+		htmlCarreras += `<option value="${c[i].id}">${c[i].nombre}</option>`;
+	}
+	htmlCarreras += `</select></div></div></div>`;
+
+	$('#headerSuperior').after(htmlCarreras);
+}
+
+function buscarGraduados()
+{
+	$('#alertaCarrera').attr('hidden', true);
+	var valCarrera = $('#carreraSelect').val();
+	if(valCarrera != 0)
+	{
+		var param = {
+			"idCarrera":valCarrera
+		};
+		$.ajax({
+			type:"POST",
+			data:param,
+			url:"getGraduadosPorCarrera.php",
+			success: function(response)
+			{
+				graduadosJSON = JSON.parse(response);
+				successGetGraduados();
+			},
+			error: function(msg)
+			{
+				alert('Contactese con el administrado. Error: '+msg);
+			}
+		});
+	}
+	else
+	{
+		$('#alertaCarrera').attr('hidden', false);
+		$('#alertaCarrera').focus();
+	}
+}
+
+function successGetGraduados()
+{
+
+	var htmlNota = (graduadosJSON.length == 0) ? "<strong>Atenci&oacute;n:</strong> No hay graduados al que enviar correos." :"<strong>Atenci&oacute;n:</strong> Se van a enviar "+graduadosJSON.length+" correos.";
+
+	$('#alertaCantidadCorreos').html(htmlNota);
+	$('#alertaCantidadCorreos').attr('hidden', false);
+}
+
+function sacarColor(me)
+{
+	hideAlerts();
+	$(me).css('box-shadow','0px 0px 10px 1px #ccc');
+}
+
+function hideAlerts()
+{
+	$('#alertaDatos').attr('hidden', true);
+	$('#alertaCarrera').attr('hidden', true);
+}
+
+$(document).ready(function(){
+	$('#progressDiv').hide();
+	$('#alertaCantidadCorreos').attr('hidden', true);
+	$('#alertaPass').attr('hidden', true);
+	cargarCarreras();
+	hideAlerts();
+});
+
+</script>
+</head>
+<body>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title text-center">Graduados</h3>
+			</div>
+
+			<div class="panel-body panel_body">
+				<form name="f1" id="form2" action="guardarinteresado.php" onsubmit="return controlSubmit();" method="post" class="form-horizontal col-xs-12 col-sm-12 col-md-12 col-lg-12 formNuevaVisita">
+
+					<div class="progress" id="progressDiv">
+						<div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" id="progressBar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:0%">
+						0%
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+							<div class="alert alert-danger text-center" id="alertaPass">
+								<strong>Atenci&oacute;n:</strong> La contrase&ntilde;a ha sido ingresada incorrectamente. El env&iacute;o de mails ha sido detenido.
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+							<div class="alert alert-danger text-center" id="alertaDatos">
+								<strong>Atenci&oacute;n:</strong> Faltan agregar datos.
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+							<div class="alert alert-danger text-center" id="alertaCarrera">
+								<strong>Atenci&oacute;n:</strong> Debe seleccionar una carrera.
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+							<div class="alert alert-info text-center" id="alertaCantidadCorreos">
+								
+							</div>
+						</div>
+					</div>
+
+					<div class="row" id="headerSuperior">
+						<legend class="text-center"><h4 class="text-center">Env&iacute;o de mail</h4></legend>
+					</div>
+
+					<div class="row">
+						<div class="form-group">
+							<label for="titulo" class="control-label col-xs-3 col-sm-2 col-md-2 col-lg-2">T&iacute;tulo:</label>
+							<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10"><input class="form-control" name="titulo" type="text" id="titulo" onkeydown="sacarColor(this)" required /></div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group">
+							<label for="contenido" class="control-label col-xs-3 col-sm-2 col-md-2 col-lg-2">Contenido:</label>
+							<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
+								<textarea class="form-control" name="contenido" rows="12" id="contenido" style="resize:none" onkeydown="sacarColor(this)" required></textarea>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group">
+							<p>
+								<center>
+									<button type="submit" id="enviar" class="btn btn-default submit" title="Enviar">Enviar</button>
+								</center>
+							</p>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
