@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="bootstrap/css/estilos.css">
 <script src="bootstrap/js/jquery.min.js"></script>
 <script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="bootstrap/js/md5-min.js"></script>
 <script>
 
 var graduadosJSON,interval;
@@ -79,7 +80,7 @@ function enviarMails()
 					
 					var prompText = `Ingrese la contraseña (Intento ${(j+1)})`;
 					var answer = prompt(prompText,'');
-					if(answer != "graduadosfrvm")
+					if(hex_md5(answer) != "fb4eeac938879974ae68cecd464b2c0e")
 					{
 						passCorrect = false;
 					}
