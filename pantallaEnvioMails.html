@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Registrar Interesado</title>
+<title>Enviar Mails</title>
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.min.css">
@@ -9,7 +9,7 @@
 <script src="bootstrap/js/bootstrap.min.js"></script>
 <script>
 
-var graduadosJSON;
+var graduadosJSON,interval;
 var carrerasIn = false;
 
 function controlVacio(nombreSelector)
@@ -27,6 +27,7 @@ function controlVacio(nombreSelector)
 function controlSubmit()
 {
 	$('#alertaPass').attr('hidden', true);
+	$('#mailsComplete').attr('hidden', true);
 
 	if(!controlVacio('#titulo')) return false;
 	if(!controlVacio('#contenido')) return false;
@@ -47,17 +48,19 @@ function enviarMails()
 	var max = graduadosJSON.length;
 	$('#progressDiv').show();
 	updatePercent(valueActual,max);
-
+	$('#detenerEnvio').show();
 	var title = $('#titulo').val();
 	var content = $('#contenido').val();
 
+	console.log(content);
+
 	var countTimeout = 0;
 	var countPass = 0;
-	var passCorrect = true;
+	var passCorrect = false;
 
 	var iGlobal = -1;
 
-	var interval = setInterval(function(){sendMail();}, 5000);
+	interval = setInterval(function(){sendMail();}, 5000);
 
 	function sendMail()
 	{
@@ -76,7 +79,7 @@ function enviarMails()
 					
 					var prompText = `Ingrese la contraseña (Intento ${(j+1)})`;
 					var answer = prompt(prompText,'');
-					if(answer != "eze")
+					if(answer != "graduadosfrvm")
 					{
 						passCorrect = false;
 					}
@@ -95,17 +98,21 @@ function enviarMails()
 
 			if(passCorrect)
 			{
-				var n,a,m;
+				var n,a,m,i;
 				n = graduadosJSON[iGlobal].nombre;
 				a = graduadosJSON[iGlobal].apellido;
 				m = graduadosJSON[iGlobal].mail;
+				i = graduadosJSON[iGlobal].id;
 
 				console.log(`Mando! ${n} ${a} ${m}`);
 
 				var param = {
+					"id":i,
 					"mail":m,
 					"title":title,
-					"content":content
+					"content":content,
+					"name":n,
+					"lastname":a
 				};
 
 				$.ajax({
@@ -114,10 +121,15 @@ function enviarMails()
 					url:'sendMailGraduado.php',
 					success: function(response)
 					{
-						if(response == "1")
+						if(response[(response.length - 1)] == "1")
 						{
 							valueActual++;
 							updatePercent(valueActual,max);
+							if(valueActual == max)
+							{
+								$('#mailsComplete').attr('hidden', false);
+								$('#progressDiv').hide();
+							}
 						}
 						else
 						{
@@ -133,6 +145,8 @@ function enviarMails()
 			else
 			{
 				$('#alertaPass').attr('hidden', false);
+				$('#progressDiv').hide();
+				clearInterval(interval);
 				break;
 			}
 
@@ -141,91 +155,6 @@ function enviarMails()
 		if(iGlobal == max - 1)
 		{
 			clearInterval(interval);
-		}
-	}
-	/*
-	for(var i = 0; i < max; i++)
-	{
-		if(i == 0 || i % 100 == 0)
-		{
-			for(var j = 0; j < 3; j++)
-			{
-				
-				var prompText = `Ingrese la contraseña (Intento ${(j+1)})`;
-				var answer = prompt(prompText,'');
-				if(answer != "eze")
-				{
-					passCorrect = false;
-				}
-				else
-				{
-					passCorrect = true;
-					j = 3;
-				}
-			
-			}
-		}
-		else
-		{
-			passCorrect = true;
-		}
-
-		if(passCorrect)
-		{
-			console.log(`Mando! ${i}`);
-			var n,a,m;
-			n = graduadosJSON[i].nombre;
-			a = graduadosJSON[i].apellido;
-			m = graduadosJSON[i].mail;
-
-			var param = {
-				"mail":m,
-				"title":title,
-				"content":content
-			};
-
-			$.ajax({
-				type:'POST',
-				data:param,
-				url:'sendMailGraduado.php',
-				success: function(response)
-				{
-					if(response == "1")
-					{
-						valueActual++;
-						updatePercent(valueActual,max);
-					}
-					else
-					{
-						alert("No se pudo enviar el mail.");
-					}
-				},
-				error: function(msg)
-				{
-					alert("Hubo un error al enviar mails. Contactarse con el administrador");
-				}
-			});
-		}
-		else
-		{
-			$('#alertaPass').attr('hidden', false);
-			break;
-		}
-
-		if(i > 0 && (i % 5 == 0))
-		{
-			sleep(5000)
-		}
-
-	}
-	*/
-}
-
-function sleep(milliseconds) {
-	var start = new Date().getTime();
-	for (var i = 0; i < 1e7; i++) {
-		if ((new Date().getTime() - start) > milliseconds){
-			break;
 		}
 	}
 }
@@ -237,6 +166,15 @@ function updatePercent(actual,max)
 	$('#progressBar').html(`${percent}%`)
 	$('#progressBar').attr('aria-valuenow',percent);
 
+}
+
+function stopSend()
+{
+	var r = confirm("Desea detener el envio?");
+	if (r == true) {
+		clearInterval(interval);
+		$('#detenerEnvio').hide();
+	}
 }
 
 function createHtmlOptions(cursos)
@@ -337,8 +275,10 @@ function hideAlerts()
 
 $(document).ready(function(){
 	$('#progressDiv').hide();
+	$('#detenerEnvio').hide();
 	$('#alertaCantidadCorreos').attr('hidden', true);
 	$('#alertaPass').attr('hidden', true);
+	$('#mailsComplete').attr('hidden', true);
 	cargarCarreras();
 	hideAlerts();
 });
@@ -365,6 +305,14 @@ $(document).ready(function(){
 						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
 							<div class="alert alert-danger text-center" id="alertaPass">
 								<strong>Atenci&oacute;n:</strong> La contrase&ntilde;a ha sido ingresada incorrectamente. El env&iacute;o de mails ha sido detenido.
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+							<div class="alert alert-success text-center" id="mailsComplete">
+								Los mensajes se han enviado correctamente.
 							</div>
 						</div>
 					</div>
@@ -408,7 +356,8 @@ $(document).ready(function(){
 						<div class="form-group">
 							<label for="contenido" class="control-label col-xs-3 col-sm-2 col-md-2 col-lg-2">Contenido:</label>
 							<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10">
-								<textarea class="form-control" name="contenido" rows="12" id="contenido" style="resize:none" onkeydown="sacarColor(this)" required></textarea>
+								<textarea class="form-control" name="contenido" rows="12" id="contenido" style="resize:none" onkeydown="sacarColor(this)" aria-describedby="helpBlock" required></textarea>
+								<span id="helpBlock" class="help-block">Puede agregar {nombre} y/o {apellido} y se reemplazar&aacute; por el nombre y/o apellido del graduado.</span>
 							</div>
 						</div>
 					</div>
@@ -418,6 +367,7 @@ $(document).ready(function(){
 							<p>
 								<center>
 									<button type="submit" id="enviar" class="btn btn-default submit" title="Enviar">Enviar</button>
+									<button type="button" id="detenerEnvio" onclick="stopSend()" class="btn btn-warning submit" title="Detener">Detener</button>
 								</center>
 							</p>
 						</div>
