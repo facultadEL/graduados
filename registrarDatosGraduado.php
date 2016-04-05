@@ -77,8 +77,8 @@ if(count($vDatos) > 1){
 	// }
 }
 
-$gra_nombre = trim(ucwords($_REQUEST['gra_nombre']));
-$gra_apellido = trim(ucwords($_REQUEST['gra_apellido']));
+$gra_nombre = trim(ucwords(strtolower($_REQUEST['gra_nombre'])));
+$gra_apellido = trim(ucwords(strtolower($_REQUEST['gra_apellido'])));
 $gra_tipodoc = trim($_REQUEST['gra_tipodoc']);
 $gra_nrodoc = trim($_REQUEST['gra_nrodoc']);
 $gra_fecnac = empty($_REQUEST['gra_fecnac']) ? '1900-01-01' : trim($_REQUEST['gra_fecnac']);
@@ -87,18 +87,18 @@ $gra_grupo = trim($_REQUEST['gra_grupo']);
 $gra_locnac = (empty($_REQUEST['gra_locnac'])) ? 0 : $_REQUEST['gra_locnac'];
 $gra_loctrab = (empty($_REQUEST['gra_loctrab'])) ? 0 : $_REQUEST['gra_loctrab'];
 $gra_locvive = (empty($_REQUEST['gra_locvive'])) ? 0 : $_REQUEST['gra_locvive'];
-$gra_calle = trim(ucwords($_REQUEST['gra_calle']));
+$gra_calle = trim(ucwords(strtolower($_REQUEST['gra_calle'])));
 $gra_nrocalle = trim($_REQUEST['gra_nrocalle']);
 $gra_depto = trim($_REQUEST['gra_depto']);
 $gra_piso = trim($_REQUEST['gra_piso']);
 $gra_mail1 = trim($_REQUEST['gra_mail1']);
 $gra_mail2 = trim($_REQUEST['gra_mail2']);
 $gra_docente = ($_REQUEST['gra_docente'] == 0) ? 'FALSE' : 'TRUE';
-$gra_especialidad = trim(ucfirst($_REQUEST['gra_especialidad']));
+$gra_especialidad = trim(ucfirst(strtolower($_REQUEST['gra_especialidad'])));
 $gra_facebook = trim(ucwords($_REQUEST['gra_facebook']));
 $gra_twitter = trim($_REQUEST['gra_twitter']);
-$gra_peraca = trim(ucfirst($_REQUEST['gra_peraca']));
-$gra_perlab = trim(ucfirst($_REQUEST['gra_perlab']));
+$gra_peraca = trim(ucfirst(strtolower($_REQUEST['gra_peraca'])));
+$gra_perlab = trim(ucfirst(strtolower($_REQUEST['gra_perlab'])));
 
 //RECIBO LOS DATOS DE LA FOTO
 $nombreFoto = $_FILES['gra_foto']['name'];
