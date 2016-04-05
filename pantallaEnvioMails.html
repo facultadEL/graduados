@@ -12,6 +12,7 @@
 
 var graduadosJSON,interval;
 var carrerasIn = false;
+var gradError = [];
 
 function controlVacio(nombreSelector)
 {
@@ -45,6 +46,7 @@ function controlSubmit()
 
 function enviarMails()
 {
+	gradError.length = 0;
 	var valueActual = 0;
 	var max = graduadosJSON.length;
 	$('#progressDiv').show();
@@ -100,10 +102,11 @@ function enviarMails()
 			if(passCorrect)
 			{
 				var n,a,m,i;
-				n = graduadosJSON[iGlobal].nombre;
-				a = graduadosJSON[iGlobal].apellido;
-				m = graduadosJSON[iGlobal].mail;
-				i = graduadosJSON[iGlobal].id;
+				var grad = graduadosJSON[iGlobal];
+				n = grad.nombre;
+				a = grad.apellido;
+				m = grad.mail;
+				i = grad.id;
 
 				console.log(`Mando! ${n} ${a} ${m}`);
 
@@ -134,6 +137,7 @@ function enviarMails()
 						}
 						else
 						{
+							gradError.push(grad);
 							alert("No se pudo enviar el mail.");
 						}
 					},
@@ -147,7 +151,7 @@ function enviarMails()
 			{
 				$('#alertaPass').attr('hidden', false);
 				$('#progressDiv').hide();
-				clearInterval(interval);
+				finishSend();
 				break;
 			}
 
@@ -155,8 +159,33 @@ function enviarMails()
 
 		if(iGlobal == max - 1)
 		{
-			clearInterval(interval);
+			finishSend();
 		}
+	}
+}
+
+function finishSend()
+{
+	clearInterval(interval);
+	$('#errorDiv').remove();
+	if(gradError.length > 0)
+	{
+		var htmlError = `<div class="row" id="errorDiv"><legend class="text-center"><h4 class="text-center">Graduados con error</h4></legend></div>`;
+		for(var i = 0; i < gradError.length; i++)
+		{
+			htmlError += `<div class="row">
+						<div class="col-xs-4">
+							<span>Nombre: ${gradError[i].nombre}</span>
+						</div>
+						<div class="col-xs-4">
+							<span>Apellido: ${gradError[i].apellido}</span>
+						</div>
+						<div class="col-xs-4">
+							<span>Mail: ${gradError[i].mail}</span>
+						</div>
+					</div>`;
+		}
+		$('#divSend').after(htmlError);
 	}
 }
 
@@ -256,7 +285,18 @@ function buscarGraduados()
 function successGetGraduados()
 {
 
-	var htmlNota = (graduadosJSON.length == 0) ? "<strong>Atenci&oacute;n:</strong> No hay graduados al que enviar correos." :"<strong>Atenci&oacute;n:</strong> Se van a enviar "+graduadosJSON.length+" correos.";
+	var htmlNota = "";
+
+	if(graduadosJSON.length == 0)
+	{
+		$('#enviar').attr('disabled',true);
+		htmlNota = "<strong>Atenci&oacute;n:</strong> No hay graduados a los que enviar correos.";
+	}
+	else
+	{
+		$('#enviar').attr('disabled',false);
+		htmlNota = `<strong>Atenci&oacute;n:</strong> Se van a enviar ${graduadosJSON.length} correos.`
+	}
 
 	$('#alertaCantidadCorreos').html(htmlNota);
 	$('#alertaCantidadCorreos').attr('hidden', false);
@@ -363,7 +403,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 
-					<div class="row">
+					<div class="row" id="divSend">
 						<div class="form-group">
 							<p>
 								<center>

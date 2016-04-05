@@ -4,7 +4,7 @@ include_once "conexion.php";
 
 $idCarrera = $_POST['idCarrera'];
 
-$cGraduados = "SELECT id_alumno,nombre_alumno,apellido_alumno,mail_alumno FROM alumno WHERE carrera_alumno='$idCarrera' AND mail_alumno IS NOT NULL AND suscrito IS TRUE;";
+$cGraduados = "SELECT id_alumno,nombre_alumno,apellido_alumno,mail_alumno FROM alumno WHERE carrera_alumno='$idCarrera' AND mail_alumno IS NOT NULL AND mail_alumno != '' AND suscrito IS TRUE;";
 $sGraduados = pg_query($cGraduados);
 
 $outJson = '[';
