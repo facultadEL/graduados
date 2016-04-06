@@ -137,6 +137,13 @@ function enviarMails()
 						}
 						else
 						{
+							valueActual++;
+							updatePercent(valueActual,max);
+							if(valueActual == max)
+							{
+								$('#mailsComplete').attr('hidden', false);
+								$('#progressDiv').hide();
+							}
 							gradError.push(grad);
 							alert("No se pudo enviar el mail.");
 						}
