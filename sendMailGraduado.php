@@ -2,6 +2,7 @@
 
 $to = $_REQUEST['mail'];
 //$to = 'eze_olea_7@hotmail.com';
+//$to = 's_extension@frvm.utn.edu.ar';
 
 require ("PHPMailer_5.2.1/class.phpmailer.php");
 
@@ -30,14 +31,21 @@ $mail = new PHPMailer();
 $mail->IsSMTP();
 $mail->SMTPAuth = true;
 $mail->SMTPSecure = "ssl"; 
+//$mail->Host = "smtp.frvm.utn.edu.ar"; // dirección del servidor
 $mail->Host = "smtp.gmail.com"; // dirección del servidor
+//$mail->Username = "graduados@frvm.utn.edu.ar"; // Usuario //VA OTRO MAIL, HAY QUE CREAR UN GMAIL CREO.
 $mail->Username = "extensionfrvm@gmail.com"; // Usuario //VA OTRO MAIL, HAY QUE CREAR UN GMAIL CREO.
 
 $mail->Password = "4537500frvm"; // Contraseña
+//$mail->Password = "kaMeleon"; // Contraseña
 
 $mail->Port = 465; // Puerto a utilizar
-$mail->From = $sendFrom; // dirección remitente
-$mail->FromName = $from_name; // nombre remitente
+//$mail->From = $sendFrom; // dirección remitente
+//$mail->SetFrom($sendFrom, $from_name);
+//$mail->AddReplyTo($sendFrom,$from_name);
+//$mail->FromName = $from_name; // nombre remitente
+
+$mail->SetFrom($sendFrom, $from_name);
 
 $mail->AddAddress($to, ''); // Esta es la dirección a donde enviamos
 
@@ -52,7 +60,7 @@ $exito = $mail->Send(); // Envía el correo.
 if($exito){
 	echo '1';
 }else{
-	echo '0';
+	echo '0'.$mail->ErrorInfo;
 }
 
 

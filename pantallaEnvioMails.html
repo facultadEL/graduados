@@ -55,7 +55,7 @@ function enviarMails()
 	var title = $('#titulo').val();
 	var content = $('#contenido').val();
 
-	console.log(content);
+	console.log(graduadosJSON);
 
 	var countTimeout = 0;
 	var countPass = 0;
@@ -125,6 +125,7 @@ function enviarMails()
 					url:'sendMailGraduado.php',
 					success: function(response)
 					{
+						console.log(response);
 						if(response[(response.length - 1)] == "1")
 						{
 							valueActual++;
@@ -175,6 +176,7 @@ function finishSend()
 {
 	clearInterval(interval);
 	$('#errorDiv').remove();
+	$('#detenerEnvio').hide();
 	if(gradError.length > 0)
 	{
 		var htmlError = `<div class="row" id="errorDiv"><legend class="text-center"><h4 class="text-center">Graduados con error</h4></legend></div>`;
