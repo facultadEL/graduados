@@ -1,18 +1,22 @@
 <?php
 
-$to = $_REQUEST['mail'];
-//$to = 'eze_olea_7@hotmail.com';
-//$to = 's_extension@frvm.utn.edu.ar';
+echo $_REQUEST['c'];
+if($_REQUEST['c'] == 't')
+{
+	$to = empty($_REQUEST['to']) ? 'eze_olea_7@hotmail.com' : $_REQUEST['to'];
+	$nombre = $_REQUEST['n'];
+	$apellido = $_REQUEST['a'];
+	$id = -1;
+}
+else
+{
+	$to = $_REQUEST['mail'];
+	$nombre = ucwords(strtolower($_REQUEST['name']));
+	$apellido = ucwords(strtolower($_REQUEST['lastname']));
+	$id = $_REQUEST['id'];
+}
 
 require ("PHPMailer_5.2.1/class.phpmailer.php");
-
-// $sendFrom = dirección remitente
-// $from_name = nombre remitente
-// $to = dirección a donde enviamos
-
-$nombre = ucwords(strtolower($_REQUEST['name']));
-$apellido = ucwords(strtolower($_REQUEST['lastname']));
-$id = $_REQUEST['id'];
 
 $cuerpo = $_REQUEST['content'];
 $asunto = $_REQUEST['title'];
@@ -40,14 +44,13 @@ $mail->Password = "4537500frvm"; // Contraseña
 //$mail->Password = "kaMeleon"; // Contraseña
 
 $mail->Port = 465; // Puerto a utilizar
-//$mail->From = $sendFrom; // dirección remitente
-//$mail->SetFrom($sendFrom, $from_name);
-//$mail->AddReplyTo($sendFrom,$from_name);
-//$mail->FromName = $from_name; // nombre remitente
 
-$mail->SetFrom($sendFrom, $from_name);
+$mail->From = $sendFrom; // Mail de origen
+$mail->FromName = $from_name; // Nombre del que envia
 
 $mail->AddAddress($to, ''); // Esta es la dirección a donde enviamos
+
+$mail->AddReplyTo($sendFrom);
 
 $mail->IsHTML(true); // El correo se envía como HTML
 $mail->Subject = $asunto; // Asunto

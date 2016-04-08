@@ -13,6 +13,7 @@
 var graduadosJSON,interval;
 var carrerasIn = false;
 var gradError = [];
+var mailPrueba;
 
 function controlVacio(nombreSelector)
 {
@@ -55,13 +56,24 @@ function enviarMails()
 	var title = $('#titulo').val();
 	var content = $('#contenido').val();
 
-	console.log(graduadosJSON);
-
 	var countTimeout = 0;
 	var countPass = 0;
 	var passCorrect = false;
 
 	var iGlobal = -1;
+
+	var urlSend = 'sendMailGraduado.php';
+	if(mailPrueba)
+	{
+		var t = $('#mailPrueba').val();
+		var n = 'Graduados';
+		var a = 'Prueba';
+		urlSend += `?c=t&to=${t}&n=${n}&a=${a}`;
+	}
+	else
+	{
+		urlSend += `?c=f`;
+	}
 
 	interval = setInterval(function(){sendMail();}, 5000);
 
@@ -82,16 +94,22 @@ function enviarMails()
 					
 					var prompText = `Ingrese la contraseña (Intento ${(j+1)})`;
 					var answer = prompt(prompText,'');
-					if(hex_md5(answer) != "fb4eeac938879974ae68cecd464b2c0e")
+					if(answer != '')
 					{
-						passCorrect = false;
+						if(hex_md5(answer) != "fb4eeac938879974ae68cecd464b2c0e")
+						{
+							passCorrect = false;
+						}
+						else
+						{
+							passCorrect = true;
+							j = 3;
+						}
 					}
 					else
 					{
-						passCorrect = true;
-						j = 3;
+						passCorrect = false;
 					}
-				
 				}
 			}
 			else
@@ -108,8 +126,6 @@ function enviarMails()
 				m = grad.mail;
 				i = grad.id;
 
-				console.log(`Mando! ${n} ${a} ${m}`);
-
 				var param = {
 					"id":i,
 					"mail":m,
@@ -122,10 +138,9 @@ function enviarMails()
 				$.ajax({
 					type:'POST',
 					data:param,
-					url:'sendMailGraduado.php',
+					url:urlSend,
 					success: function(response)
 					{
-						console.log(response);
 						if(response[(response.length - 1)] == "1")
 						{
 							valueActual++;
@@ -311,6 +326,19 @@ function successGetGraduados()
 	$('#alertaCantidadCorreos').attr('hidden', false);
 }
 
+function setCheckPrueba()
+{
+	mailPrueba = $('#checkPrueba').is(':checked');
+	if(mailPrueba)
+	{
+		$('#mailPrueba').prop('disabled',false);
+	}
+	else
+	{
+		$('#mailPrueba').prop('disabled',true);	
+	}
+}
+
 function sacarColor(me)
 {
 	hideAlerts();
@@ -331,6 +359,7 @@ $(document).ready(function(){
 	$('#mailsComplete').attr('hidden', true);
 	cargarCarreras();
 	hideAlerts();
+	setCheckPrueba();
 });
 
 </script>
@@ -397,7 +426,7 @@ $(document).ready(function(){
 
 					<div class="row">
 						<div class="form-group">
-							<label for="titulo" class="control-label col-xs-3 col-sm-2 col-md-2 col-lg-2">T&iacute;tulo:</label>
+							<label for="titulo" class="control-label col-xs-3 col-sm-2 col-md-2 col-lg-2">Asunto:</label>
 							<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10"><input class="form-control" name="titulo" type="text" id="titulo" onkeydown="sacarColor(this)" required /></div>
 						</div>
 					</div>
@@ -409,6 +438,15 @@ $(document).ready(function(){
 								<textarea class="form-control" name="contenido" rows="12" id="contenido" style="resize:none" onkeydown="sacarColor(this)" aria-describedby="helpBlock" required></textarea>
 								<span id="helpBlock" class="help-block">Puede agregar {nombre} y/o {apellido} y se reemplazar&aacute; por el nombre y/o apellido del graduado.</span>
 							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="form-group">
+							<label for="checkPrueba" class="control-label col-xs-2 col-sm-3 col-md-3 col-lg-3 col-sm-offset-2"><input name="checkPrueba" type="checkbox" id="checkPrueba" onclick="setCheckPrueba()" /> Mail de Prueba</label>
+														
+							<label for="mailPrueba" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2">Mail:</label>
+							<div class="col-xs-10 col-sm-5 col-md-5 col-lg-5"><input class="form-control" name="mailPrueba" type="text" id="mailPrueba" /></div>
 						</div>
 					</div>
 
