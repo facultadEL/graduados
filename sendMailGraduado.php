@@ -32,36 +32,7 @@ $cuerpo = str_replace( "{apellido}", $apellido, $cuerpo);
 
 $cuerpo .= '<br /><br /> Si desea dejar de recibir estos correos haga click <a href="http://extension.frvm.utn.edu.ar/graduados/unsubscribe.php?to='.$vMail[0].'-'.$vMail[1].'&i='.$id.'">Aquí</a>';
 
-$mail = new PHPMailer();
-$mail->IsSMTP();
-$mail->SMTPAuth = true;
-$mail->SMTPSecure = "ssl"; 
-//$mail->Host = "smtp.frvm.utn.edu.ar"; // dirección del servidor
-$mail->Host = "smtp.gmail.com"; // dirección del servidor
-//$mail->Username = "graduados@frvm.utn.edu.ar"; // Usuario //VA OTRO MAIL, HAY QUE CREAR UN GMAIL CREO.
-//$mail->Username = "extensionfrvm@gmail.com"; // Usuario //VA OTRO MAIL, HAY QUE CREAR UN GMAIL CREO.
-$mail->Username = "graduadosutnvillamaria@gmail.com"; // Usuario //VA OTRO MAIL, HAY QUE CREAR UN GMAIL CREO.
-
-//$mail->Password = "4537500frvm"; // Contraseña
-$mail->Password = "Kameleon"; // Contraseña
-//$mail->Password = "kaMeleon"; // Contraseña
-
-$mail->Port = 465; // Puerto a utilizar
-
-$mail->From = $sendFrom; // Mail de origen
-$mail->FromName = $from_name; // Nombre del que envia
-
-$mail->AddAddress($to, ''); // Esta es la dirección a donde enviamos
-
-$mail->AddReplyTo($sendFrom);
-
-$mail->IsHTML(true); // El correo se envía como HTML
-$mail->Subject = $asunto; // Asunto
-$mail->Body = $cuerpo; // Mensaje a enviar
-//$mail->AltBody = "Hola mundo. Esta es la primer línean Acá continuo el mensaje"; // cuerpo alternativo del mensaje
-//$mail->AddAttachment("imagenes/imagen.jpg", "imagen.jpg");
-$mail->CharSet = 'UTF-8';
-$exito = $mail->Send(); // Envía el correo.
+include_once "datosMail.php";
 
 if($exito){
 	echo '1';
