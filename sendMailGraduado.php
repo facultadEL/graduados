@@ -1,6 +1,6 @@
 <?php
 
-echo $_REQUEST['c'];
+//echo $_REQUEST['c'];
 if($_REQUEST['c'] == 't')
 {
 	$to = empty($_REQUEST['to']) ? 'eze_olea_7@hotmail.com' : $_REQUEST['to'];
@@ -11,6 +11,7 @@ if($_REQUEST['c'] == 't')
 else
 {
 	$to = $_REQUEST['mail'];
+	//$to = 'eze_olea_7@hotmail.com';
 	$nombre = ucwords(strtolower($_REQUEST['name']));
 	$apellido = ucwords(strtolower($_REQUEST['lastname']));
 	$id = $_REQUEST['id'];
@@ -20,7 +21,7 @@ require ("PHPMailer_5.2.1/class.phpmailer.php");
 
 $cuerpo = $_REQUEST['content'];
 $asunto = $_REQUEST['title'];
-$sendFrom = 'graduados@frvm.utn.edu.ar';
+$sendFrom = 'graduadosutnvillamaria@gmail.com';
 $from_name = 'Graduados - FRVM';
 
 $vMail = explode('@', $to);
@@ -38,9 +39,11 @@ $mail->SMTPSecure = "ssl";
 //$mail->Host = "smtp.frvm.utn.edu.ar"; // dirección del servidor
 $mail->Host = "smtp.gmail.com"; // dirección del servidor
 //$mail->Username = "graduados@frvm.utn.edu.ar"; // Usuario //VA OTRO MAIL, HAY QUE CREAR UN GMAIL CREO.
-$mail->Username = "extensionfrvm@gmail.com"; // Usuario //VA OTRO MAIL, HAY QUE CREAR UN GMAIL CREO.
+//$mail->Username = "extensionfrvm@gmail.com"; // Usuario //VA OTRO MAIL, HAY QUE CREAR UN GMAIL CREO.
+$mail->Username = "graduadosutnvillamaria@gmail.com"; // Usuario //VA OTRO MAIL, HAY QUE CREAR UN GMAIL CREO.
 
-$mail->Password = "4537500frvm"; // Contraseña
+//$mail->Password = "4537500frvm"; // Contraseña
+$mail->Password = "Kameleon"; // Contraseña
 //$mail->Password = "kaMeleon"; // Contraseña
 
 $mail->Port = 465; // Puerto a utilizar

@@ -10,10 +10,15 @@
 <script src="bootstrap/js/md5-min.js"></script>
 <script>
 
-var graduadosJSON,interval;
+var graduadosJSON = [];
 var carrerasIn = false;
 var gradError = [];
-var mailPrueba;
+var mailPrueba,carrerasJSON,interval;
+var cantCarreras = 0;
+var afterCarrera = '#headerSuperior';
+var carrerasSelected = [];
+var gradPorCarrera = [];
+var carreraOk = false;
 
 function controlVacio(nombreSelector)
 {
@@ -34,7 +39,7 @@ function controlSubmit()
 
 	if(!controlVacio('#titulo')) return false;
 	if(!controlVacio('#contenido')) return false;
-	if($('#carreraSelect').val() == 0)
+	if(!carreraOk)
 	{
 		$('#alertaCarrera').attr('hidden', false);
 		return false;
@@ -45,8 +50,20 @@ function controlSubmit()
 	return false;
 }
 
+function formatGradJSON()
+{
+	for(var i = 1; i <= cantCarreras; i++)
+	{
+		if(gradPorCarrera[i] != undefined)
+		{
+			graduadosJSON = graduadosJSON.concat(gradPorCarrera[i]);
+		}
+	}
+}
+
 function enviarMails()
 {
+	formatGradJSON();
 	gradError.length = 0;
 	var valueActual = 0;
 	var max = graduadosJSON.length;
@@ -141,6 +158,7 @@ function enviarMails()
 					url:urlSend,
 					success: function(response)
 					{
+						console.log(response);
 						if(response[(response.length - 1)] == "1")
 						{
 							valueActual++;
@@ -249,9 +267,9 @@ function cargarCarreras()
 		url: 'getCarreras.php',
 		success: function(response)
 		{
-			var r = JSON.parse(response);
+			carrerasJSON = JSON.parse(response);
 			carrerasIn = true;
-			successGetCarreras(r);
+			successGetCarreras(carrerasJSON);
 		},
 		error: function(msg)
 		{
@@ -262,25 +280,51 @@ function cargarCarreras()
 
 function successGetCarreras(c)
 {
-	var htmlCarreras = `<div class="row"><div class="form-group"><label for="carreraSelect" class="control-label col-xs-3 col-sm-2 col-md-2 col-lg-2">Carrera:</label>`;
-	htmlCarreras += `<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10"><select class="form-control" name="carreraSelect" id="carreraSelect" onchange="buscarGraduados()">`;
-	var l = c.length;
-	htmlCarreras += '<option value="0">Seleccione una carrera</option>';
-	for(var i = 0; i < l; i++)
+	if(cantCarreras < 5)
 	{
-		htmlCarreras += `<option value="${c[i].id}">${c[i].nombre}</option>`;
-	}
-	htmlCarreras += `</select></div></div></div>`;
+		c = (c == undefined) ? carrerasJSON : c;
+		cantCarreras++;
+		var htmlCarreras = `<div class="row" id="rowCarrera${cantCarreras}"><div class="form-group"><label for="carrera${cantCarreras}" class="control-label col-xs-3 col-sm-2 col-md-2 col-lg-2">Carrera:</label>`;
+		htmlCarreras += `<div class="col-xs-9 col-sm-10 col-md-10 col-lg-10"><select class="form-control" name="carrera${cantCarreras}" id="carrera${cantCarreras}" onchange="buscarGraduados('${cantCarreras}')">`;
+		var l = c.length;
+		htmlCarreras += '<option value="0">Seleccione una carrera</option>';
+		for(var i = 0; i < l; i++)
+		{
+			htmlCarreras += `<option value="${c[i].id}">${c[i].nombre}</option>`;
+		}
+		htmlCarreras += `</select></div></div></div>`;
 
-	$('#headerSuperior').after(htmlCarreras);
+		$(afterCarrera).after(htmlCarreras);
+		afterCarrera = `#rowCarrera${cantCarreras}`;
+	}
 }
 
-function buscarGraduados()
+function reorderCarrerasSelected()
+{
+	carrerasSelected = [];
+	carreraOk = false;
+	for(var i = 1; i <= cantCarreras; i++)
+	{
+		var cName = `#carrera${i}`;
+		var valCarrera = $(cName).val();
+		if(valCarrera != 0)
+		{
+			carreraOk = true;
+			carrerasSelected.push(valCarrera);
+		}
+	}
+}
+
+function buscarGraduados(index)
 {
 	$('#alertaCarrera').attr('hidden', true);
-	var valCarrera = $('#carreraSelect').val();
-	if(valCarrera != 0)
+	var cName = `#carrera${index}`;
+	var valCarrera = $(cName).val();
+	if(valCarrera != 0 && carrerasSelected.indexOf(valCarrera) == -1)
 	{
+		reorderCarrerasSelected();
+		successGetCarreras();
+
 		var param = {
 			"idCarrera":valCarrera
 		};
@@ -290,7 +334,8 @@ function buscarGraduados()
 			url:"getGraduadosPorCarrera.php",
 			success: function(response)
 			{
-				graduadosJSON = JSON.parse(response);
+				var jParse = JSON.parse(response);
+				gradPorCarrera[index] = jParse;
 				successGetGraduados();
 			},
 			error: function(msg)
@@ -299,11 +344,36 @@ function buscarGraduados()
 			}
 		});
 	}
-	else
+	else if(valCarrera == 0)
 	{
+		gradPorCarrera[index] = [];
+		if(gradPorCarrera.length > 0)
+		{
+			successGetGraduados();
+		}
+		$('#alertaCarrera').html(`<strong>Atenci&oacute;n:</strong> Debe seleccionar una carrera.`)
 		$('#alertaCarrera').attr('hidden', false);
 		$('#alertaCarrera').focus();
 	}
+	else if(carrerasSelected.indexOf(valCarrera) != -1)
+	{
+		$('#alertaCarrera').html(`<strong>Atenci&oacute;n:</strong> La carrera no debe estar seleccionada.`)
+		$('#alertaCarrera').attr('hidden', false);
+		$('#alertaCarrera').focus();
+	}
+}
+
+function getLength()
+{
+	var cantGrad = 0;
+	for(var i = 1; i <= cantCarreras; i++)
+	{
+		if(gradPorCarrera[i] != undefined)
+		{
+			cantGrad += gradPorCarrera[i].length;
+		}
+	}
+	return cantGrad;
 }
 
 function successGetGraduados()
@@ -311,7 +381,7 @@ function successGetGraduados()
 
 	var htmlNota = "";
 
-	if(graduadosJSON.length == 0)
+	if(getLength() == 0)
 	{
 		$('#enviar').attr('disabled',true);
 		htmlNota = "<strong>Atenci&oacute;n:</strong> No hay graduados a los que enviar correos.";
@@ -319,7 +389,7 @@ function successGetGraduados()
 	else
 	{
 		$('#enviar').attr('disabled',false);
-		htmlNota = `<strong>Atenci&oacute;n:</strong> Se van a enviar ${graduadosJSON.length} correos.`
+		htmlNota = `<strong>Atenci&oacute;n:</strong> Se van a enviar ${getLength()} correos.`
 	}
 
 	$('#alertaCantidadCorreos').html(htmlNota);
