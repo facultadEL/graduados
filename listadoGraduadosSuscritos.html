@@ -70,102 +70,65 @@ function loadTable()
 			htmlToAdd += `<td>${a.telefono}</td>`;
 			htmlToAdd += `<td>${a.motivo}</td>`;
 			htmlToAdd += `<td>${vF[2]}/${vF[1]}/${vF[0]}</td>`;
+			htmlToAdd += `<td><button type="button" class="btn btn-default" onclick="openModalAnular('${a.id}','${a.apellido}, ${a.nombre}')"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button></td>`;
 			htmlToAdd += `</tr>`;
 		}
 	}
 	else
 	{
-		htmlToAdd = `<tr><td colspan="6" class="text-center">No hay graduados desuscriptos</td></tr>`;
+		htmlToAdd = `<tr><td colspan="7" class="text-center">No hay graduados desuscriptos</td></tr>`;
 	}
 
 	$('#cuerpoTabla').html(htmlToAdd);
 }
 
-/*
-function openModalAnular(index)
+
+function openModalAnular(id,nombreGrad)
 {
 	var htmlModal = '';
-	var cursosInteresado = interesadosToShow[index].cursos.split('<br />');
-	var lengthCursos = cursosInteresado.length;
 	
-	htmlModal += `<input type="hidden" id="cantCursosInteresado" value="${lengthCursos}" />`;
-	htmlModal += `<input type="hidden" id="indexInteresado" value="${index}" />`;
-	htmlModal += `<div class="row"><div class="form-group"><label for="check0" class="control-label col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><input name="check0" type="checkbox" id="check0" onclick="checkAll()"/> Todos</label></div></div>`;
-	for(var i = 1; i <= lengthCursos; i++)
-	{
-		htmlModal += `<div class="row"><div class="form-group"><label for="check${i}" class="control-label col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center"><input name="check${i}" type="checkbox" id="check${i}" class="checkCurso" /> ${cursosInteresado[(i - 1)]}</label></div></div>`;
-	}
-
+	htmlModal += `<input type="hidden" id="idGraduado" value="${id}" />`;
+	htmlModal += `<div class="row"><div class="form-group"><label for="check0" class="control-label col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">Desea activar a ${nombreGrad}?</label></div></div>`;
+	
 	$('#modalBody').html(htmlModal);
 
 	$('#myModal').modal('show');
 }
 
 
-function confirmarAnular()
+function confirmarModal()
 {
-	var cant = $('#cantCursosInteresado').val();
-	var indexInt = $('#indexInteresado').val();
+	var idGraduado = $('#idGraduado').val();
 
-	var idInteresado = interesadosToShow[indexInt].id;
-	var cursosInt = interesadosToShow[indexInt].cursos.split('<br />');
+	var param = {
+		'id': idGraduado
+	};
 
-	var vCursos = [];
-
-	for(var i = 1; i <= cursosInt.length; i++)
-	{
-		var nameChk = `#check${i}`;
-		if($(nameChk).is(':checked'))
+	$.ajax({
+		type:'POST',
+		url:'activarGraduado.php',
+		data:param,
+		success:function(response)
 		{
-			vCursos.push(cursosInt[(i-1)]);
-		}
-	}
-
-	var cursosToSend = '';
-	var cantCursos = vCursos.length;
-	if(cantCursos > 0)
-	{
-		for(var i = 0; i < cantCursos; i++)
+			if(response[response.length - 1] == '1')
+			{
+				cargarGraduado();
+			}
+			else
+			{
+				alert('Error al activar al graduado');
+			}
+		},
+		error: function(msg)
 		{
-			cursosToSend += vCursos[i];
-			if(i < (cantCursos - 1))
-			{
-				cursosToSend += '/--/';
-			}
+			alert(`Contactese con el administrador. Error: ${msg}`);
 		}
-
-		var param = {
-			'id': idInteresado,
-			'cursos':cursosToSend
-		};
-
-		$.ajax({
-			type:'POST',
-			url:'anularInteresados.php',
-			data:param,
-			success:function(response)
-			{
-				if(response[response.length - 1] == '1')
-				{
-					cargarInteresados();
-				}
-				else
-				{
-					alert('Error al anular interesado');
-				}
-			},
-			error: function(msg)
-			{
-				alert(`Contactese con el administrador. Error: ${msg}`);
-			}
-		});
-
-	}
+	});
 
 	$('#myModal').modal('hide');
 
 }
-*/
+
 
 function formatDate(d)
 {
@@ -227,12 +190,12 @@ $(document).ready(function(){
 			<table class="table table-striped table-hover printThis">
 				<thead>
 					<tr>
-						<td colspan="6" class="text-center resizeTable">
+						<td colspan="7" class="text-center resizeTable">
 							<strong>Graduados Desuscriptos</strong>
 						</td>
 					</tr>
 					<tr>
-						<td colspan="6" class="text-center resizeTable" align="center">
+						<td colspan="7" class="text-center resizeTable" align="center">
 							<div class="input-group" style="width:100%">
 								<input type="text" class="form-control" placeholder="Buscar..." id="searchWord" onkeyup="searchControl()">
 								<span class="input-group-btn">
@@ -249,12 +212,29 @@ $(document).ready(function(){
 						<td><strong>Telefono</strong></td>
 						<td><strong>Motivo</strong></td>
 						<td><strong>Fecha Desuscripci&oacute;n</strong></td>
+						<td><strong>Activar</strong></td>
 					</tr>
 				</thead>
 				<tbody id="cuerpoTabla">
 					
 				</tbody>
 			</table>
+		</div>
+	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="myModalLabel">Activar Graduado</h4>
+				</div>
+				<div class="modal-body" id="modalBody">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+					<button type="button" class="btn btn-primary" onclick="confirmarModal()">Confirmar</button>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>
