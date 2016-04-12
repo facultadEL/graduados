@@ -30,7 +30,7 @@ $cuerpo = str_replace( "\n", '<br />', $cuerpo);
 $cuerpo = str_replace( "{nombre}", $nombre, $cuerpo);
 $cuerpo = str_replace( "{apellido}", $apellido, $cuerpo);
 
-$cuerpo .= '<br /><br /> Si desea dejar de recibir estos correos haga click <a href="http://extension.frvm.utn.edu.ar/graduados/unsubscribe.php?to='.$vMail[0].'-'.$vMail[1].'&i='.$id.'">Aquí</a>';
+$cuerpo .= '<br /><br /> Si desea dejar de recibir estos correos haga click <a href="http://extension.frvm.utn.edu.ar/graduados/landUnsubscribe.php?to='.$vMail[0].'/--/'.$vMail[1].'&i='.$id.'">Aquí</a>';
 
 include_once "datosMail.php";
 
