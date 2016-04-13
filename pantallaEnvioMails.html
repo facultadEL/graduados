@@ -13,12 +13,13 @@
 var graduadosJSON = [];
 var carrerasIn = false;
 var gradError = [];
-var mailPrueba,carrerasJSON,interval;
+var mailPrueba,carrerasJSON,interval,actual;
 var cantCarreras = 0;
 var afterCarrera = '#headerSuperior';
 var carrerasSelected = [];
 var gradPorCarrera = [];
 var carreraOk = false;
+var seleccionados = [];
 
 function controlVacio(nombreSelector)
 {
@@ -280,7 +281,7 @@ function cargarCarreras()
 
 function successGetCarreras(c)
 {
-	if(cantCarreras < 5)
+	if(cantCarreras < 5 && seleccionados.indexOf(actual) == -1)
 	{
 		c = (c == undefined) ? carrerasJSON : c;
 		cantCarreras++;
@@ -296,6 +297,7 @@ function successGetCarreras(c)
 
 		$(afterCarrera).after(htmlCarreras);
 		afterCarrera = `#rowCarrera${cantCarreras}`;
+		seleccionados.push(actual);
 	}
 }
 
@@ -323,6 +325,7 @@ function buscarGraduados(index)
 	if(valCarrera != 0 && carrerasSelected.indexOf(valCarrera) == -1)
 	{
 		reorderCarrerasSelected();
+		actual = index;
 		successGetCarreras();
 
 		var param = {
