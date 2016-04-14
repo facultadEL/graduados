@@ -2,7 +2,7 @@
 
 include_once 'conexion.php';
 
-$c = "SELECT * FROM alumno WHERE suscrito IS FALSE;";
+$c = "SELECT * FROM alumno ORDER BY apellido_alumno, nombre_alumno;";
 
 $s = pg_query($c);
 $outJson = '[';
@@ -30,8 +30,8 @@ while($r = pg_fetch_array($s))
 		{
 			$telefono .= '<br/>';
 		}
-		$car = $rT['caracteristica_alumno'];
-		$tel = $rT['telefono_alumno'];
+		$car = trim($rT['caracteristica_alumno']);
+		$tel = trim($rT['telefono_alumno']);
 
 		$telefono .= "$car - $tel ";
 	}

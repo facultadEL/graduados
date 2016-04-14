@@ -63,14 +63,30 @@ function loadTable()
 
 			var vF = a.fechaDesuscripto.split('-');
 
-			htmlToAdd += `<tr>`;
+			var fecha = '';
+			var botton = '';
+			var bg = '';
+			if(a.suscrito == 'f')
+			{
+				fecha = `<td>${vF[2]}/${vF[1]}/${vF[0]}</td>`;
+				botton = `<td><button type="button" class="btn btn-default" onclick="openModalAnular('${a.id}','${a.apellido}, ${a.nombre}')"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button></td>`;
+				bg = ' class="bg-danger"';
+				$('#tableContent').removeClass('table-striped');
+			}
+			else
+			{
+				fecha = `<td></td>`;
+				botton = `<td></td>`;
+			}
+
+			htmlToAdd += `<tr ${bg}>`;
 			htmlToAdd += `<td>${(i+1)}</td>`;
 			htmlToAdd += `<td>${a.apellido}, ${a.nombre}</td>`;
 			htmlToAdd += `<td>${a.mail}</td>`;
 			htmlToAdd += `<td>${a.telefono}</td>`;
 			htmlToAdd += `<td>${a.motivo}</td>`;
-			htmlToAdd += `<td>${vF[2]}/${vF[1]}/${vF[0]}</td>`;
-			htmlToAdd += `<td><button type="button" class="btn btn-default" onclick="openModalAnular('${a.id}','${a.apellido}, ${a.nombre}')"><span class="glyphicon glyphicon-ok-circle" aria-hidden="true"></span></button></td>`;
+			htmlToAdd += `${fecha}`;
+			htmlToAdd += `${botton}`;
 			htmlToAdd += `</tr>`;
 		}
 	}
@@ -140,6 +156,22 @@ function formatDate(d)
 
 function inSearch(a)
 {
+	if(searchWord == 'suscrito')
+	{
+		if(a.suscrito == 't')
+			return true;
+		else
+			return false;
+	}
+
+	if(searchWord == 'desuscrito')
+	{
+		if(a.suscrito == 'f')
+			return true;
+		else
+			return false;
+	}
+
 	if((a.nombre.toLowerCase().indexOf(searchWord) == -1) && (a.apellido.toLowerCase().indexOf(searchWord) == -1))
 	{
 		return false;
@@ -187,21 +219,24 @@ $(document).ready(function(){
 <body>
 	<div class="container">
 		<div class="table-responsive">
-			<table class="table table-striped table-hover printThis">
+			<table class="table table-striped table-hover printThis" id="tableContent">
 				<thead>
 					<tr>
 						<td colspan="7" class="text-center resizeTable">
-							<strong>Graduados Desuscriptos</strong>
+							<strong>Graduados</strong>
 						</td>
 					</tr>
 					<tr>
 						<td colspan="7" class="text-center resizeTable" align="center">
-							<div class="input-group" style="width:100%">
+							<div class="input-group" style="width:100%" aria-describedby='helpBlock'>
 								<input type="text" class="form-control" placeholder="Buscar..." id="searchWord" onkeyup="searchControl()">
 								<span class="input-group-btn">
 									<button class="btn btn-default" type="button">Buscar</button>
-									<button class="btn btn-default" type="button" onclick="printMe()">Imprimir</button>
+									<!--button class="btn btn-default" type="button" onclick="printMe()">Imprimir</button-->
 								</span>
+							</div>
+							<div style="width: 100%">
+								<span id="helpBlock" class="help-block">Puede buscar suscrito o desuscrito para traer quienes estén activados o no.</span>
 							</div>
 						</td>
 					</tr>
