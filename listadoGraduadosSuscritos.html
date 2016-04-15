@@ -182,27 +182,27 @@ function inSearch(a)
 	}
 }
 
-/*
+
 function printMe()
 {
-	var data = '';
-	for(var i = 0; i < interesadosToShow.length;i++)
+	var data = 'Listado de Graduados/-/-/#/-/Graduado/-/Mail/-/Telefono/-/Motivo/-/Fecha desuscrito/-/-/';
+	for(var i = 0; i < graduadosToShow.length;i++)
 	{
-		var a = interesadosToShow[i];
-		var vF = a.fechaRegistro.split('-');
-		data += `${a.apellido}, ${a.nombre}/-/${a.caracteristicaCel} - ${a.telefonoCel}/-/${a.caracteristicaCasa} - ${a.telefonoCasa}/-/${a.mail}/-/${a.localidad}/-/${a.cursos}/-/${vF[2]}/${vF[1]}/${vF[0]}`;
+		var a = graduadosToShow[i];
+		var vF = a.fechaDesuscripto.split('-');
+		data += `${(i+1)}/-/${a.apellido}, ${a.nombre}/-/${a.mail}/-/${a.telefono}/-/${a.motivo}/-/${vF[2]}/${vF[1]}/${vF[0]}`;
 
-		if(i < interesadosToShow.length - 1)
+		if(i < graduadosToShow.length - 1)
 		{
 			data += '/-/-/';
 		}
 	}
 
-	var url = `excelInteresados.php?d=${data}`;
+	var url = `printList.php?d=${data}`;
 
 	window.open(url,'_blank');
 }
-*/
+
 
 function searchControl()
 {
