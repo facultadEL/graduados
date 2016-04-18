@@ -34,11 +34,30 @@ $cuerpo .= '<br /><br /> Si desea dejar de recibir estos correos haga click <a h
 
 include_once "datosMail.php";
 
+if($exito)
+{
+	$success = 'true';
+}
+else
+{
+	$success = 'false';
+}
+
+$response = '[{
+	"success":"'.$success.'",
+	"nombre":"'.$nombre.'",
+	"apellido":"'.$apellido.'",
+	"mail":"'.$to.'"
+}]';
+
+
+echo $response;
+
+/*
 if($exito){
 	echo '1';
 }else{
 	echo '0'.$mail->ErrorInfo;
 }
-
-
+*/
 ?>

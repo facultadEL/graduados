@@ -20,6 +20,7 @@ var carrerasSelected = [];
 var gradPorCarrera = [];
 var carreraOk = false;
 var seleccionados = [];
+var gradMail = [];
 
 function controlVacio(nombreSelector)
 {
@@ -159,28 +160,21 @@ function enviarMails()
 					url:urlSend,
 					success: function(response)
 					{
-						console.log(response);
-						if(response[(response.length - 1)] == "1")
+						var o = JSON.parse(response)[0];
+						gradMail.push(o);
+
+						if(o.success == "false")
 						{
-							valueActual++;
-							updatePercent(valueActual,max);
-							if(valueActual == max)
-							{
-								$('#mailsComplete').attr('hidden', false);
-								$('#progressDiv').hide();
-							}
-						}
-						else
-						{
-							valueActual++;
-							updatePercent(valueActual,max);
-							if(valueActual == max)
-							{
-								$('#mailsComplete').attr('hidden', false);
-								$('#progressDiv').hide();
-							}
-							gradError.push(grad);
 							alert("No se pudo enviar el mail.");
+						}
+
+						valueActual++;
+						updatePercent(valueActual,max);
+						if(valueActual == max)
+						{
+							$('#mailsComplete').attr('hidden', false);
+							$('#progressDiv').hide();
+							finishSend();
 						}
 					},
 					error: function(msg)
@@ -198,11 +192,12 @@ function enviarMails()
 			}
 
 		}
-
+		/*
 		if(iGlobal == max - 1)
 		{
 			finishSend();
 		}
+		*/
 	}
 }
 
@@ -211,20 +206,42 @@ function finishSend()
 	clearInterval(interval);
 	$('#errorDiv').remove();
 	$('#detenerEnvio').hide();
-	if(gradError.length > 0)
+	if(gradMail.length > 0)
 	{
-		var htmlError = `<div class="row" id="errorDiv"><legend class="text-center"><h4 class="text-center">Graduados con error</h4></legend></div>`;
-		for(var i = 0; i < gradError.length; i++)
+		var htmlError = `<div class="row" id="errorDiv"><legend class="text-center"><h4 class="text-center">Mails enviados</h4></legend></div>`;
+		htmlError += `<div class="row bg-info">
+						<div class="col-xs-4">
+							<span><b>Nombre</b></span>
+						</div>
+						<div class="col-xs-4">
+							<span><b>Apellido</b></span>
+						</div>
+						<div class="col-xs-4">
+							<span><b>Mail</b></span>
+						</div>
+					</div>`;
+		var bgClass = '';
+		for(var i = 0; i < gradMail.length; i++)
 		{
-			htmlError += `<div class="row">
+			var g = gradMail[i];
+
+			if(g.success == 'false')
+			{
+				bgClass = 'bg-danger';
+			}
+			else
+			{
+				bgClass = '';
+			}
+			htmlError += `<div class="row ${bgClass}">
 						<div class="col-xs-4">
-							<span>Nombre: ${gradError[i].nombre}</span>
+							<span>${g.nombre}</span>
 						</div>
 						<div class="col-xs-4">
-							<span>Apellido: ${gradError[i].apellido}</span>
+							<span>${g.apellido}</span>
 						</div>
 						<div class="col-xs-4">
-							<span>Mail: ${gradError[i].mail}</span>
+							<span>${g.mail}</span>
 						</div>
 					</div>`;
 		}
