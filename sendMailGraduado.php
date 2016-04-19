@@ -34,6 +34,15 @@ $cuerpo .= '<br /><br /> Si desea dejar de recibir estos correos haga click <a h
 
 include_once "datosMail.php";
 
+for($i = 0; $i < 5;$i++)
+{
+	$exito = $mail->Send(); // Envía el correo.1
+	if($exito)
+	{
+		$i=5;
+	}
+}
+
 if($exito)
 {
 	$success = 'true';
