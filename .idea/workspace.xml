@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1e638acd-edf7-4222-95a0-8606f08fb3d2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="1e638acd-edf7-4222-95a0-8606f08fb3d2" name="Default" comment="" />
     <ignored path="graduados.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -24,7 +22,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="empleo.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="empleo.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/empleo.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="476">
@@ -34,7 +32,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="descuentos.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="descuentos.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/descuentos.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="85">
@@ -67,7 +65,7 @@
       <file leaf-file-name="pantallaEnvioMails.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pantallaEnvioMails.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8738">
+            <state relative-caret-position="375">
               <caret line="514" column="26" selection-start-line="512" selection-start-column="20" selection-end-line="514" selection-end-column="26" />
               <folding>
                 <marker date="1462649766471" expanded="true" signature="4246:4486" placeholder="..." />
@@ -229,12 +227,12 @@
       <workItem from="1462725624630" duration="613000" />
       <workItem from="1462800974071" duration="57000" />
       <workItem from="1462804367471" duration="1651000" />
-      <workItem from="1462807336133" duration="180000" />
+      <workItem from="1462807336133" duration="323000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4824000" />
+    <option name="totallyTimeSpent" value="4967000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="1" width="1378" height="743" extended-state="0" />
@@ -419,27 +417,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pantallaEnvioMails.html">
+    <entry file="file://$PROJECT_DIR$/descuentos.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8738">
-          <caret line="514" column="26" selection-start-line="512" selection-start-column="20" selection-end-line="514" selection-end-column="26" />
-          <folding>
-            <marker date="1462649766471" expanded="true" signature="4246:4486" placeholder="..." />
-            <marker date="1462649766471" expanded="true" signature="4275:4322" placeholder="..." />
-            <marker date="1462649766471" expanded="true" signature="4351:4400" placeholder="..." />
-            <marker date="1462649766471" expanded="true" signature="4429:4474" placeholder="..." />
-            <marker date="1462649766471" expanded="true" signature="4727:4961" placeholder="..." />
-            <marker date="1462649766471" expanded="true" signature="4756:4801" placeholder="..." />
-            <marker date="1462649766471" expanded="true" signature="4830:4877" placeholder="..." />
-            <marker date="1462649766471" expanded="true" signature="4906:4949" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/empleo.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="85">
+          <caret line="5" column="88" selection-start-line="5" selection-start-column="88" selection-end-line="5" selection-end-column="88" />
           <folding />
         </state>
       </provider>
@@ -460,10 +441,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/descuentos.html">
+    <entry file="file://$PROJECT_DIR$/pantallaEnvioMails.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="88" selection-start-line="5" selection-start-column="88" selection-end-line="5" selection-end-column="88" />
+        <state relative-caret-position="375">
+          <caret line="514" column="26" selection-start-line="512" selection-start-column="20" selection-end-line="514" selection-end-column="26" />
+          <folding>
+            <marker date="1462649766471" expanded="true" signature="4246:4486" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4275:4322" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4351:4400" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4429:4474" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4727:4961" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4756:4801" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4830:4877" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4906:4949" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/empleo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>
