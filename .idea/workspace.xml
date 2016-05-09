@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1e638acd-edf7-4222-95a0-8606f08fb3d2" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Cursos.html" afterPath="$PROJECT_DIR$/Cursos.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Descuentos.html" afterPath="$PROJECT_DIR$/Descuentos.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Empleo.html" afterPath="$PROJECT_DIR$/Empleo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Posgrados.html" afterPath="$PROJECT_DIR$/Posgrados.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="graduados.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,41 +24,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Empleo.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Empleo.html">
+      <file leaf-file-name="empleo.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/empleo.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="81" selection-start-line="21" selection-start-column="81" selection-end-line="21" selection-end-column="81" />
+            <state relative-caret-position="476">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Descuentos.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Descuentos.html">
+      <file leaf-file-name="descuentos.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/descuentos.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="90" selection-start-line="21" selection-start-column="90" selection-end-line="21" selection-end-column="90" />
+            <state relative-caret-position="85">
+              <caret line="5" column="88" selection-start-line="5" selection-start-column="88" selection-end-line="5" selection-end-column="88" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Cursos.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Cursos.html">
+      <file leaf-file-name="cursos.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cursos.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="86" selection-start-line="21" selection-start-column="86" selection-end-line="21" selection-end-column="86" />
+            <state relative-caret-position="34">
+              <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Posgrados.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Posgrados.html">
+      <file leaf-file-name="posgrados.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/posgrados.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+            <state relative-caret-position="34">
+              <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -70,7 +67,7 @@
       <file leaf-file-name="pantallaEnvioMails.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pantallaEnvioMails.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
+            <state relative-caret-position="8738">
               <caret line="514" column="26" selection-start-line="512" selection-start-column="20" selection-end-line="514" selection-end-column="26" />
               <folding>
                 <marker date="1462649766471" expanded="true" signature="4246:4486" placeholder="..." />
@@ -102,10 +99,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/GraduadosApp.html" />
-        <option value="$PROJECT_DIR$/Descuentos.html" />
-        <option value="$PROJECT_DIR$/Empleo.html" />
         <option value="$PROJECT_DIR$/Cursos.html" />
+        <option value="$PROJECT_DIR$/Empleo.html" />
+        <option value="$PROJECT_DIR$/empleo.html" />
+        <option value="$PROJECT_DIR$/cursos.html" />
         <option value="$PROJECT_DIR$/Posgrados.html" />
+        <option value="$PROJECT_DIR$/posgrados.html" />
+        <option value="$PROJECT_DIR$/Descuentos.html" />
+        <option value="$PROJECT_DIR$/descuentos.html" />
       </list>
     </option>
   </component>
@@ -227,12 +228,13 @@
       <workItem from="1462649787871" duration="2323000" />
       <workItem from="1462725624630" duration="613000" />
       <workItem from="1462800974071" duration="57000" />
-      <workItem from="1462804367471" duration="1577000" />
+      <workItem from="1462804367471" duration="1651000" />
+      <workItem from="1462807336133" duration="180000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4570000" />
+    <option name="totallyTimeSpent" value="4824000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="1" width="1378" height="743" extended-state="0" />
@@ -273,6 +275,55 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/empleo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="81" selection-start-line="21" selection-start-column="81" selection-end-line="21" selection-end-column="81" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/descuentos.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="90" selection-start-line="21" selection-start-column="90" selection-end-line="21" selection-end-column="90" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cursos.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="86" selection-start-line="21" selection-start-column="86" selection-end-line="21" selection-end-column="86" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/posgrados.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pantallaEnvioMails.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8738">
+          <caret line="514" column="26" selection-start-line="512" selection-start-column="20" selection-end-line="514" selection-end-column="26" />
+          <folding>
+            <marker date="1462649766471" expanded="true" signature="4246:4486" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4275:4322" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4351:4400" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4429:4474" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4727:4961" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4756:4801" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4830:4877" placeholder="..." />
+            <marker date="1462649766471" expanded="true" signature="4906:4949" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/listadoGraduadosSuscritos.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4267">
@@ -281,7 +332,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Empleo.html">
+    <entry file="file://$PROJECT_DIR$/empleo.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
@@ -289,14 +340,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GraduadosApp.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/GraduadosApp.html" />
     <entry file="file://$PROJECT_DIR$/listadoGraduadosSuscritos.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4267">
@@ -305,7 +349,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Empleo.html">
+    <entry file="file://$PROJECT_DIR$/empleo.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
@@ -313,14 +357,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GraduadosApp.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/GraduadosApp.html" />
     <entry file="file://$PROJECT_DIR$/listadoGraduadosSuscritos.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4267">
@@ -329,7 +366,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Empleo.html">
+    <entry file="file://$PROJECT_DIR$/empleo.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
@@ -337,14 +374,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GraduadosApp.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/GraduadosApp.html" />
     <entry file="file://$PROJECT_DIR$/bootstrap/normalize.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -380,14 +410,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GraduadosApp.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/GraduadosApp.html" />
     <entry file="file://$PROJECT_DIR$/listadoGraduadosSuscritos.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="545">
@@ -398,7 +421,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pantallaEnvioMails.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
+        <state relative-caret-position="8738">
           <caret line="514" column="26" selection-start-line="512" selection-start-column="20" selection-end-line="514" selection-end-column="26" />
           <folding>
             <marker date="1462649766471" expanded="true" signature="4246:4486" placeholder="..." />
@@ -413,34 +436,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Descuentos.html">
+    <entry file="file://$PROJECT_DIR$/empleo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="90" selection-start-line="21" selection-start-column="90" selection-end-line="21" selection-end-column="90" />
+        <state relative-caret-position="476">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Empleo.html">
+    <entry file="file://$PROJECT_DIR$/cursos.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="81" selection-start-line="21" selection-start-column="81" selection-end-line="21" selection-end-column="81" />
+        <state relative-caret-position="34">
+          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Cursos.html">
+    <entry file="file://$PROJECT_DIR$/posgrados.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="86" selection-start-line="21" selection-start-column="86" selection-end-line="21" selection-end-column="86" />
+        <state relative-caret-position="34">
+          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Posgrados.html">
+    <entry file="file://$PROJECT_DIR$/descuentos.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state relative-caret-position="85">
+          <caret line="5" column="88" selection-start-line="5" selection-start-column="88" selection-end-line="5" selection-end-column="88" />
           <folding />
         </state>
       </provider>
