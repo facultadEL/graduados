@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1e638acd-edf7-4222-95a0-8606f08fb3d2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/nuevoCurso.html" afterPath="$PROJECT_DIR$/nuevoCurso.html" />
     </list>
     <ignored path="graduados.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -27,9 +28,38 @@
       <file leaf-file-name="nuevoCurso.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nuevoCurso.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="28" column="7" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
+            <state relative-caret-position="174">
+              <caret line="21" column="79" selection-start-line="21" selection-start-column="79" selection-end-line="21" selection-end-column="79" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="posgrados.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/posgrados.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pantallaEnvioMails.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pantallaEnvioMails.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="514" column="26" selection-start-line="512" selection-start-column="20" selection-end-line="514" selection-end-column="26" />
+              <folding>
+                <marker date="1462649766471" expanded="true" signature="4246:4486" placeholder="..." />
+                <marker date="1462649766471" expanded="true" signature="4275:4322" placeholder="..." />
+                <marker date="1462649766471" expanded="true" signature="4351:4400" placeholder="..." />
+                <marker date="1462649766471" expanded="true" signature="4429:4474" placeholder="..." />
+                <marker date="1462649766471" expanded="true" signature="4727:4961" placeholder="..." />
+                <marker date="1462649766471" expanded="true" signature="4756:4801" placeholder="..." />
+                <marker date="1462649766471" expanded="true" signature="4830:4877" placeholder="..." />
+                <marker date="1462649766471" expanded="true" signature="4906:4949" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -58,6 +88,7 @@
         <option value="$PROJECT_DIR$/posgrados.html" />
         <option value="$PROJECT_DIR$/Descuentos.html" />
         <option value="$PROJECT_DIR$/descuentos.html" />
+        <option value="$PROJECT_DIR$/nuevoCurso.html" />
       </list>
     </option>
   </component>
@@ -101,8 +132,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -123,6 +152,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -181,15 +212,16 @@
       <workItem from="1462800974071" duration="57000" />
       <workItem from="1462804367471" duration="1651000" />
       <workItem from="1462807336133" duration="323000" />
-      <workItem from="1462807805841" duration="98000" />
+      <workItem from="1462807805841" duration="679000" />
+      <workItem from="1462934359479" duration="2927000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5065000" />
+    <option name="totallyTimeSpent" value="8573000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="1" width="1378" height="743" extended-state="0" />
+    <frame x="-8" y="1" width="1378" height="743" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2496329" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -227,30 +259,17 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/empleo.html">
+    <entry file="file://$PROJECT_DIR$/nuevoCurso.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/descuentos.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="88" selection-start-line="5" selection-start-column="88" selection-end-line="5" selection-end-column="88" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cursos.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/empleo.html" />
+    <entry file="file://$PROJECT_DIR$/descuentos.html" />
+    <entry file="file://$PROJECT_DIR$/cursos.html" />
     <entry file="file://$PROJECT_DIR$/posgrados.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -377,14 +396,6 @@
     <entry file="file://$PROJECT_DIR$/descuentos.html" />
     <entry file="file://$PROJECT_DIR$/cursos.html" />
     <entry file="file://$PROJECT_DIR$/empleo.html" />
-    <entry file="file://$PROJECT_DIR$/posgrados.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pantallaEnvioMails.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -402,10 +413,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/posgrados.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="21" selection-start-line="2" selection-start-column="21" selection-end-line="2" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/nuevoCurso.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="28" column="7" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
+        <state relative-caret-position="174">
+          <caret line="21" column="79" selection-start-line="21" selection-start-column="79" selection-end-line="21" selection-end-column="79" />
           <folding />
         </state>
       </provider>

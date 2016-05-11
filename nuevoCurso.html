@@ -19,9 +19,55 @@
 
         <div class="panel-body panel_body">
             <div class="row" id="headerSuperior">
-                <legend class="text-center"><h4 class="text-center">Administrar Cursos</h4></legend>
+                <legend class="text-center"><h4 class="text-center">Nuevo Curso</h4></legend>
             </div>
         </div>
+        <div class="conainer">
+            <form role="form">
+                <div class="form-group">
+                    <label for="nombreCurso">Curso:</label>
+                    <input type="text" class="form-control" id="nombreCurso" placeholder="Ingrese el nombre del curso">
+                </div>
+                <div class="form-group">
+                    <label for="duracion">Duración:</label>
+                    <input type="number" class="form-control" id="duracion" placeholder="Ingrese la duración en clases">
+                </div>
+                <div class="form-group">
+                    <label for="clasesXsemana">Claases a la semana:</label>
+                    <input type="number" class="form-control" id="clasesXsemana" placeholder="Ingrese la cantiad de clases por semana">
+                </div>
+                <!-- se elige el día y el horario de cursado -->
+                <strong>Horarios por día</strong>
+                <div class="form-group">
+                    <select>
+                        <option value="diaN">Día N</option>
+                    </select> <br>
+                    <strong>Día N: Lunes</strong> <br>
+                    <strong>Horario: 20:30</strong>
+                </div>
+                <div class="form-group">
+                    <label for="detalleCurso">Detalle:</label><br>
+                    <textarea id="detalleCurso" rows="4" cols="50" placeholder="Ingrese una pequeña descripción del curso"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="dirigidoa">Dirigido a:</label>
+                    <select id="dirigidoa">
+                        <option value="todos">Todos las carreras</option>
+                        <option value="isistemas">Ingeniería en Sistemas de Informción</option>
+                        <option value="imecanica">Ingeniería Mecánica</option>
+                        <option value="ielec">Ingeniería Electrónica</option>
+                        <option value="iquim">Ingeniería Química</option>
+                        <option value="rural">Licenciatura en Administración Rural</option>
+                        <option value="mec">Tecnicatura Superior en Mecatrónica</option>
+                        <option value="log">Tecnicatura Superior en Logística</option>
+                        <option value="mart">Tecnicatura Superior en Negociación de Bienes</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-default">Guardar</button>
+            </form>
+        </div>
+
     </div>
 </div>
 
