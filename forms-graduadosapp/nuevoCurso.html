@@ -1,66 +1,92 @@
 <html>
 <head>
-    <title> Cursos </title>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" type="text/css" href="bootstrap/css/estilos.css">
-    <script src="bootstrap/js/jquery.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="bootstrap/js/md5-min.js"></script>
-
+	<title> Cursos </title>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="../bootstrap/css/estilos.css">
+	<script src="../bootstrap/js/jquery.min.js"></script>
+	<script src="../bootstrap/js/bootstrap.min.js"></script>
+	<script>
+	
+	function getCarreras()
+	{
+		$.ajax({
+			type:"POST",
+			url:"../getCarreras.php",
+			success:function(response)
+			{
+				var r = JSON.parse(response);
+				successGetCarreras(r);
+			},
+			error: function(msg)
+			{
+				alert('No se pudieron traer las carreras');
+			}
+		});
+	}
+	
+	function successGetCarreras(data)
+	{
+		var htmlOptions = `<option value="99">Todas las carreras</option>`;
+		for(var i = 0; i < data.length; i++)
+		{
+			htmlOptions += `<option value="${data[i].id}">${data[i].nombre}</option>`;
+		}
+		
+		$('#dirigidoa').html(htmlOptions);
+	}
+	
+	$(document).ready(function(){
+	   
+		getCarreras();
+		
+	});
+		
+	</script>
 </head>
 <body>
 <div class="container">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title text-center">Graduados</h3>
-        </div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title text-center">Graduados</h3>
+		</div>
 
-        <div class="panel-body panel_body">
-            <div class="row" id="headerSuperior">
-                <legend class="text-center"><h4 class="text-center">Nuevo Curso</h4></legend>
-            </div>
-        </div>
-        <div class="conainer">
-            <form role="form">
-                <div class="form-group">
-                    <label for="nombreCurso">Curso:</label>
-                    <input type="text" class="form-control" id="nombreCurso" placeholder="Ingrese el nombre del curso">
-                </div>
-                <div class="form-group">
-                    <label for="duracion">Duración:</label>
-                    <input type="number" class="form-control" id="duracion" placeholder="Ingrese la duración en clases">
-                </div>
-                <div class="form-group">
-                    <label for="dYh">Días y Horarios:</label><br>
-                    <textarea class="form-control" id="dYh" cols="50" rows="4" placeholder="Ingrese el/los día/s y horario/s de cursado"></textarea>
-                </div>
-                <!-- se elige el día y el horario de cursado -->
-                <div class="form-group">
-                    <label for="detalleCurso">Detalle:</label><br>
-                    <textarea  class="form-control" id="detalleCurso" rows="4" cols="50" placeholder="Ingrese una pequeña descripción del curso"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="dirigidoa">Dirigido a:</label>
-                    <select id="dirigidoa">
-                        <option value="todos">Todos las carreras</option>
-                        <option value="isistemas">Ingeniería en Sistemas de Informción</option>
-                        <option value="imecanica">Ingeniería Mecánica</option>
-                        <option value="ielec">Ingeniería Electrónica</option>
-                        <option value="iquim">Ingeniería Química</option>
-                        <option value="rural">Licenciatura en Administración Rural</option>
-                        <option value="mec">Tecnicatura Superior en Mecatrónica</option>
-                        <option value="log">Tecnicatura Superior en Logística</option>
-                        <option value="mart">Tecnicatura Superior en Negociación de Bienes</option>
-                    </select>
-                </div>
+		<div class="panel-body panel_body">
+			<div class="row" id="headerSuperior">
+				<legend class="text-center"><h4 class="text-center">Nuevo Curso</h4></legend>
+			</div>
+		</div>
+		<div class="container">
+			<form role="form">
+				<div class="form-group">
+					<label for="nombreCurso">Curso:</label>
+					<input type="text" class="form-control" id="nombreCurso" placeholder="Ingrese el nombre del curso">
+				</div>
+				<div class="form-group">
+					<label for="duracion">Duración:</label>
+					<input type="number" class="form-control" id="duracion" min="1" placeholder="Ingrese la duración en clases">
+				</div>
+				<div class="form-group">
+					<label for="dYh">Días y Horarios:</label><br>
+					<textarea class="form-control" id="dYh" cols="50" rows="4" placeholder="Ingrese el/los día/s y horario/s de cursado"></textarea>
+				</div>
+				<!-- se elige el día y el horario de cursado -->
+				<div class="form-group">
+					<label for="detalleCurso">Detalle:</label><br>
+					<textarea  class="form-control" id="detalleCurso" rows="4" cols="50" placeholder="Ingrese una pequeña descripción del curso"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="dirigidoa">Dirigido a:</label>
+					<select id="dirigidoa" name="dirigidoa" class="form-control">
+					</select>
+				</div>
 
-                <button type="submit" class="btn btn-default">Guardar</button>
-            </form>
-        </div>
+				<button type="submit" class="btn btn-default">Guardar</button>
+			</form>
+		</div>
 
-    </div>
+	</div>
 </div>
 
 </body>
