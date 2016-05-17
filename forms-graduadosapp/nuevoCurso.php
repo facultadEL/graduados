@@ -9,6 +9,8 @@
 	<script src="../bootstrap/js/bootstrap.min.js"></script>
 	<script>
 	
+	var idCurso = -1;
+	
 	function getCarreras()
 	{
 		$.ajax({
@@ -35,16 +37,62 @@
 		}
 		
 		$('#dirigidoa').html(htmlOptions);
+		$('#aplica1').html(htmlOptions);
+		$('#aplica2').html(htmlOptions);
+		$('#aplica3').html(htmlOptions);
+	}
+	
+	function setCurso(i)
+	{
+		idCurso = parseInt(i);
+	}
+	
+	function getDatosCurso()
+	{
+		if(idCurso != -1)
+		{
+			var param = {
+				"id":idCurso
+			};
+			
+			$.ajax({
+				type:"POST",
+				url:"getDatosCurso.php",
+				data:param,
+				success:function(response)
+				{
+					var r = JSON.parse(response);
+					successGetDatosCurso(r);
+				},
+				error: function(msg)
+				{
+					alert('Error al traer los datos del curso');
+				}
+			})
+		}
+	}
+	
+	function successGetDatosCurso(data)
+	{
+		
 	}
 	
 	$(document).ready(function(){
 	   
 		getCarreras();
+		getDatosCurso();
 		
 	});
 		
 	</script>
 </head>
+<?php
+
+$id = isset($_REQUEST['id']) ? $_REQUEST['id'] : '-1';
+
+echo "<script>setCurso('".$id."');</script>";
+
+?>
 <body>
 <div class="container">
 	<div class="panel panel-default">
@@ -81,7 +129,21 @@
 					<select id="dirigidoa" name="dirigidoa" class="form-control">
 					</select>
 				</div>
-
+				<div class="form-group">
+					<label for="aplica1">Aplica a:</label>
+					<select id="aplica1" name="aplica1" class="form-control">
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="aplica2">Aplica a:</label>
+					<select id="aplica2" name="aplica2" class="form-control">
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="aplica3">Aplica a:</label>
+					<select id="aplica3" name="aplica3" class="form-control">
+					</select>
+				</div>
 				<button type="submit" class="btn btn-default">Guardar</button>
 			</form>
 		</div>
