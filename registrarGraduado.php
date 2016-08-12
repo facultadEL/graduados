@@ -356,6 +356,7 @@ if ($id_Alumno != 0) {
 			$gra_perlab = $rowAlumno['perfil_laboral_alumno'];
 			$gra_docente = $rowAlumno['gra_docente'];
 			$gra_especialidad = $rowAlumno['gra_especialidad'];
+			$legajo = $rowAlumno['legajo'];
 			//$destinoImagen = $rowAlumno['foto_alumno'];
 			//$ancho_final = $rowAlumno['ancho_final'];
 			//$alto_final = $rowAlumno['alto_final'];
@@ -385,7 +386,12 @@ if ($id_Alumno != 0) {
 					<input class="form-control input-sm" name="gra_apellido" id="gra_apellido" type="text" value="<?php echo $gra_apellido; ?>" maxlength="30" title="Ingrese el apellido del graduado"/>
 				</div>	
 			</div>
-				
+			<div class="form-group">
+				<label for="legajo" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Legajo:</label>
+				<div class="col-xs-5 col-sm-4 col-md-2 col-lg-2">
+					<input class="form-control input-sm" name="legajo" id="legajo" type="text" value="<?php echo $legajo; ?>" maxlength="30" title="Ingrese el legajo del graduado"/>
+				</div>
+			</div>
 				<div class="form-group">
 					<label for="gra_tipodoc" class="control-label col-xs-2 col-sm-2 col-md-2 col-lg-2 text-left">Tipo Doc.:</label>
 					<div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">
